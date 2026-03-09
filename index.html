@@ -2817,15 +2817,15 @@ async function fetchCsvAny(gid, timeoutEach=6000){
 }
 
 /* Fetch por "sheet + range" (robusto, evita depender de gid para Configuracion) */
+/* Fetch por "sheet + range" (robusto, evita depender de gid para Configuracion) */
 function rangeUrlsBySheet(sheetName, rangeA1){
   const ts = Date.now();
   const s = encodeURIComponent(sheetName);
   const r = encodeURIComponent(rangeA1);
-  // gviz soporta sheet + range muy bien (ideal para celdas sueltas)
+  // Solo usamos gviz/tq. Eliminamos el fallback de "export" porque 
+  // Google Sheets ignora el parámetro "sheet" en export y trae datos cruzados.
   return [
-    `https://docs.google.com/spreadsheets/d/${KEY}/gviz/tq?tqx=out:csv&sheet=${s}&range=${r}&_=${ts}`,
-    // fallback: a veces sheet+range funciona también en export
-    `https://docs.google.com/spreadsheets/d/${KEY}/export?format=csv&sheet=${s}&range=${r}&_=${ts}`
+    `https://docs.google.com/spreadsheets/d/${KEY}/gviz/tq?tqx=out:csv&sheet=${s}&range=${r}&_=${ts}`
   ];
 }
 async function fetchCsvBySheetRange(sheetName, rangeA1, timeoutEach=5500){
@@ -3399,10 +3399,17 @@ function closeBox(withScale){
 }
 
 /* Abrir WhatsApp */
+/* Abrir WhatsApp */
 function openWA(payload){
-  const tel = window.__WHATSAPP_DIGITS || window.__CONFIG_PHONE_DIGITS || '';
-  let message = '';
+  // Forzamos a que use ÚNICAMENTE el número validado de esta sucursal
+  const tel = window.__WHATSAPP_DIGITS;
+  
+  if (!tel) {
+    msg('Error: Número de WhatsApp no configurado', true);
+    return;
+  }
 
+  let message = '';
   if (Array.isArray(payload)) {
     const unique = Array.from(new Set(payload.map(pad4)));
     if (!unique.length) return;
