@@ -2922,21 +2922,17 @@ async function fetchBranches(){
       SUCURSALES_RANGE,
       5000
     );
-
     const rows = parseCSV(txt);
     if(!rows || rows.length <= 1) return [];
 
     const out = [];
-
     for(let i = 1; i < rows.length; i++){
       const row = rows[i] || [];
-
       const name = String(row[0] || '').trim();
       const detail = String(row[1] || '').trim();
       const rawSheetId = String(row[2] || '').trim();
       const image = String(row[3] || '').trim();
       const enabledRaw = String(row[4] || '').trim().toLowerCase();
-
       const enabled =
         enabledRaw === 'true' ||
         enabledRaw === 'verdadero' ||
@@ -2948,7 +2944,9 @@ async function fetchBranches(){
       if(!name && !detail && !image && !rawSheetId) continue;
 
       const branchIndex = out.length;
-      const sheetId = branchIndex === 0 ? BASE_KEY : sanitizeSheetId(rawSheetId);
+      
+      // ✅ ELIMINADA LA EXCEPCIÓN: Ahora siempre toma el ID de la columna C
+      const sheetId = sanitizeSheetId(rawSheetId);
 
       if(!name || !sheetId) continue;
 
@@ -2960,7 +2958,7 @@ async function fetchBranches(){
         image,
         sheetId,
         enabled: true,
-        isBase: branchIndex === 0
+        isBase: false // ✅ Ninguna sucursal es "Base" por defecto ahora
       });
     }
 
@@ -3015,17 +3013,16 @@ function hideBranchEnterOverlay(){
 function openBranch(branch){
   if(!branch || BRANCH_SELECTION_LOCK) return;
   BRANCH_SELECTION_LOCK = true;
-  const safeSheetId = sanitizeSheetId(branch.sheetId) || BASE_KEY;
-  const branchBid = branch.isBase ? 'base' : String(branch.index ?? '');
-
-  // Una sola carga: eliminamos la pantalla intermedia de entrada
-  // y dejamos únicamente el boot real de la página destino.
+  
+  // ✅ Siempre usa el sheetId específico de la sucursal de la columna C
+  const safeSheetId = sanitizeSheetId(branch.sheetId);
+  const branchBid = String(branch.index ?? '');
+  
   const active = document.querySelector(`.branch-card[data-branch-index="${Number(branch.index ?? 0)}"]`);
   if(active) active.classList.add('is-entering');
 
-  const targetUrl = branch.isBase
-    ? buildPanelUrl('', { branchopen:true, bid: 'base' })
-    : buildPanelUrl(safeSheetId, { branchopen:true, bid: branchBid });
+  // ✅ Siempre arma la URL forzando el ID propio de la sucursal
+  const targetUrl = buildPanelUrl(safeSheetId, { branchopen:true, bid: branchBid });
 
   location.href = targetUrl;
 }
