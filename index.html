@@ -3553,7 +3553,6 @@ async function loadWinnersFast() {
     if (winnersImages.length > 0) {
       const bubble = document.getElementById('winnersBubble');
       if (bubble) {
-        // Solo mostramos el botón neón, sin inyectar miniatura
         bubble.classList.add('show');
       }
       buildWinnersCarousel();
@@ -3598,7 +3597,6 @@ function buildWinnersCarousel() {
 
   closeBtn.addEventListener('click', closeCarousel);
 
-  // === DETECCIÓN INTELIGENTE DE TOQUE ===
   const onHumanTouchStart = () => {
     stopWinnersAutoPlay();
     clearTimeout(winnersResumeTimer);
@@ -4395,6 +4393,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     if(nowKey!==DAY_MARK){ DAY_MARK=nowKey; await syncMapFast(); DAILY=[]; pickDaily(true); renderGrid(); return; }
     const before=DAILY.length; await syncMapFast(); if(DAILY.length!==before){ renderGrid(); }
   }, 20000);
+
 });
   </script>
 </body>
