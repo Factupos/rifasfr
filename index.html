@@ -2395,13 +2395,13 @@ header{
 .branch-topbar{
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 270px);
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 340px);
   align-items: center;
-  column-gap: 10px;
+  column-gap: 8px;
   width: 100%;
   max-width: 760px;
   margin-bottom: 18px;
-  min-height: 108px;
+  min-height: 124px;
   animation: fadeSlideDown 0.6s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
@@ -2462,8 +2462,8 @@ header{
   display:inline-flex;
   justify-content:center;
   align-items:center;
-  width:255px;
-  height:87px;
+  width:320px;
+  height:108px;
   isolation:isolate;
   pointer-events:none;
 }
@@ -2471,7 +2471,7 @@ header{
 .winners-premium-btn .button-wrapper::before{
   content:"";
   position:absolute;
-  inset:14px 46px;
+  inset:18px 54px;
   border-radius:999px;
   background: radial-gradient(circle at center, rgba(255, 183, 43, 0.16), rgba(255, 183, 43, 0.03) 55%, transparent 75%);
   filter: blur(10px);
@@ -2525,9 +2525,9 @@ header{
 .winners-premium-btn .winner-btn{
   position:relative;
   z-index:2;
-  min-width:158px;
-  height:44px;
-  padding:0 22px;
+  min-width:194px;
+  height:55px;
+  padding:0 30px;
   border:none;
   border-radius:999px;
   overflow:hidden;
@@ -2538,9 +2538,9 @@ header{
 
   color:#ffffff;
   font-family:"Arial Black", "Montserrat", "Segoe UI", sans-serif;
-  font-size:16px;
+  font-size:18.8px;
   font-weight:900;
-  letter-spacing:1.45px;
+  letter-spacing:1.8px;
   text-transform:uppercase;
 
   background:
@@ -2752,33 +2752,34 @@ header{
 
 @media (max-width: 768px){
   .branch-topbar{
-    grid-template-columns: minmax(0, 1fr) 192px;
-    min-height: 92px;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    min-height: 104px;
     margin-bottom: 14px;
     column-gap: 8px;
   }
 
   .winners-premium-btn{
-    width: 192px;
-    height: 60px;
+    width: 240px;
+    height: 78px;
+    transform: translate3d(-16px, 0, 0);
   }
 
   .winners-premium-btn .button-wrapper{
-    width: 172px;
-    height: 60px;
+    width: 216px;
+    height: 78px;
   }
 
   .winners-premium-btn .button-wrapper::before{
-    inset: 11px 34px;
+    inset: 14px 42px;
     filter: blur(8px);
   }
 
   .winners-premium-btn .winner-btn{
-    min-width: 118px;
-    height: 34px;
-    padding: 0 14px;
-    font-size: 11.2px;
-    letter-spacing: 1.15px;
+    min-width: 146px;
+    height: 42px;
+    padding: 0 19px;
+    font-size: 13.6px;
+    letter-spacing: 1.28px;
   }
 
   .winners-premium-btn .winner-btn::after{
@@ -2807,31 +2808,32 @@ header{
 
 @media (max-width: 560px){
   .branch-topbar{
-    grid-template-columns: minmax(0, 1fr) 176px;
-    min-height: 84px;
-    column-gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 210px;
+    min-height: 96px;
+    column-gap: 8px;
   }
 
   .winners-premium-btn{
-    width: 176px;
-    height: 54px;
+    width: 210px;
+    height: 68px;
+    transform: translate3d(-12px, 0, 0);
   }
 
   .winners-premium-btn .button-wrapper{
-    width: 154px;
-    height: 54px;
+    width: 188px;
+    height: 68px;
   }
 
   .winners-premium-btn .button-wrapper::before{
-    inset: 10px 31px;
+    inset: 12px 36px;
   }
 
   .winners-premium-btn .winner-btn{
-    min-width: 108px;
-    height: 31px;
-    padding: 0 14px;
-    font-size: 10.2px;
-    letter-spacing: 1px;
+    min-width: 128px;
+    height: 37px;
+    padding: 0 16px;
+    font-size: 11.8px;
+    letter-spacing: 1.05px;
   }
 
   .winners-premium-btn .ambient-reflection{
@@ -2842,26 +2844,27 @@ header{
 
 @media (max-width: 420px){
   .branch-topbar{
-    grid-template-columns: minmax(0, 1fr) 168px;
-    min-height: 80px;
-    column-gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 198px;
+    min-height: 90px;
+    column-gap: 8px;
   }
 
   .winners-premium-btn{
-    width: 168px;
-    height: 52px;
+    width: 198px;
+    height: 64px;
+    transform: translate3d(-10px, 0, 0);
   }
 
   .winners-premium-btn .button-wrapper{
-    width: 146px;
-    height: 52px;
+    width: 176px;
+    height: 64px;
   }
 
   .winners-premium-btn .winner-btn{
-    min-width: 102px;
-    height: 26px;
-    font-size: 9.8px;
-    letter-spacing: .9px;
+    min-width: 120px;
+    height: 34px;
+    font-size: 11.1px;
+    letter-spacing: .98px;
   }
 }
 
