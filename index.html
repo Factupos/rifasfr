@@ -2392,134 +2392,108 @@ header{
    🔥 BURBUJA DE GANADORES Y CARRUSEL PREMIUM
    ========================================================= */
 /* Ajuste de la barra superior para separar el logo de la burbuja */
-/* =========================================================
-   🏆 BOTÓN GANADORES PREMIUM Y CARRUSEL
-   ========================================================= */
-/* =========================================================
-   🏆 BOTÓN GANADORES NEÓN PÚRPURA ULTRA-PREMIUM
-   ========================================================= */
 .branch-topbar {
   justify-content: space-between !important;
   max-width: 100% !important;
-  padding: 0 5px;
-  width: 100%;
+  padding: 0 10px;
 }
+.branch-brand { justify-content: flex-start !important; }
 
-.winners-premium-btn {
+/* La Burbuja tipo "Historia" */
+.winners-bubble-wrap {
   position: relative;
-  display: none; /* Se muestra por JS */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  animation: floatBubble 4s ease-in-out infinite alternate;
+  display: none; /* Se muestra por JS si hay imágenes */
+}
+.winners-bubble-wrap.show { display: flex; }
+
+.winners-bubble {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 0deg, #FFC400, #FF2E2E, #0B5CFF, #00D46A, #FFC400);
+  animation: spinGradient 4s linear infinite;
+  box-shadow: 0 10px 25px rgba(255, 196, 0, 0.4);
+  position: relative;
+}
+.winners-bubble-inner {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-solid);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 18px;
-  border: none;
-  border-radius: 999px;
-  
-  /* Fondo oscuro cristalino para resaltar el neón */
-  background: linear-gradient(135deg, rgba(26, 0, 51, 0.8) 0%, rgba(76, 0, 128, 0.8) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  
-  color: #fff;
-  font-weight: 900;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  isolation: isolate;
+  font-size: 28px;
   overflow: hidden;
-  
-  /* El Resplandor Neón Púrpura/Magenta */
-  box-shadow:
-    0 0 10px rgba(176, 38, 255, 0.5),
-    0 0 20px rgba(176, 38, 255, 0.4),
-    0 0 40px rgba(176, 38, 255, 0.3),
-    inset 0 0 15px rgba(255, 0, 255, 0.4);
-    
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.winners-bubble-inner img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.winners-text {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #FFC400;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* Animación de entrada y pulsación continua */
-.winners-premium-btn.show {
-  display: inline-flex;
-  animation: 
-    popInBtn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, 
-    neonPulse 2s infinite alternate 0.5s; /* El pulso arranca tras aparecer */
-}
+@keyframes spinGradient { to { transform: rotate(360deg); } }
+@keyframes floatBubble { from { transform: translateY(0); } to { transform: translateY(-5px); } }
 
-/* Borde interior súper nítido */
-.winners-premium-btn::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0));
-  z-index: -1;
-  pointer-events: none;
+/* Carrusel Fullscreen (Lightbox) */
+.winners-lightbox {
+  position: fixed; inset: 0; z-index: 1000000;
+  background: rgba(4, 10, 24, 0.95);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  display: none; flex-direction: column;
+  opacity: 0; transition: opacity 0.3s ease;
 }
+.winners-lightbox.show { display: flex; opacity: 1; }
 
-/* Rayo de luz diagonal pasando sobre el botón */
-.winners-premium-btn::after {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-  transform: rotate(45deg) translateX(-150%);
-  animation: lightSweep 3.5s infinite cubic-bezier(0.2, 1, 0.2, 1);
-  z-index: -1;
-  pointer-events: none;
+.winners-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 20px 0; flex-shrink: 0;
 }
-
-.winners-premium-btn span {
-  position: relative;
-  z-index: 2;
-  /* Texto que brilla */
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(255, 0, 255, 0.8);
+.winners-title {
+  color: #fff; font-size: 18px; font-weight: 900;
+  background: linear-gradient(90deg, #FFC400, #FF2E2E);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-
-.winners-premium-btn i {
-  font-style: normal;
-  font-size: 16px;
-  animation: starTwinkle 1.5s infinite alternate;
+.winners-close {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  width: 40px; height: 40px; border-radius: 50%; color: #fff;
+  font-size: 24px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; backdrop-filter: blur(10px);
 }
+.winners-close:active { transform: scale(0.9); }
 
-.winners-premium-btn:active {
-  transform: scale(0.92);
+/* Track de desplazamiento nativo ultra fluido */
+.winners-track {
+  display: flex; flex: 1; overflow-x: auto;
+  scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  align-items: center; padding: 0 10px; gap: 10px;
 }
+.winners-track::-webkit-scrollbar { display: none; }
 
-/* === KEYFRAMES === */
-@keyframes neonPulse {
-  0% {
-    box-shadow:
-      0 0 10px rgba(176, 38, 255, 0.6),
-      0 0 20px rgba(176, 38, 255, 0.4),
-      0 0 40px rgba(176, 38, 255, 0.2),
-      inset 0 0 15px rgba(255, 0, 255, 0.4);
-    filter: brightness(1);
-  }
-  100% {
-    box-shadow:
-      0 0 15px rgba(200, 80, 255, 0.9),
-      0 0 30px rgba(200, 80, 255, 0.7),
-      0 0 60px rgba(200, 80, 255, 0.6),
-      inset 0 0 25px rgba(255, 0, 255, 0.7);
-    filter: brightness(1.2);
-  }
+.winner-slide {
+  flex: 0 0 100%; height: 80vh; scroll-snap-align: center;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s ease;
 }
-
-@keyframes lightSweep {
-  0% { transform: translateX(-150%) rotate(45deg); }
-  100% { transform: translateX(150%) rotate(45deg); }
-}
-
-@keyframes starTwinkle {
-  0% { transform: scale(0.8); opacity: 0.7; }
-  100% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 6px #fff); }
-}
-
-@keyframes popInBtn { 
-  from { opacity: 0; transform: scale(0.8); } 
-  to { opacity: 1; transform: scale(1); } 
+.winner-slide img {
+  max-width: 90%; max-height: 100%; object-fit: contain;
+  border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
 }
     
 </style>
@@ -2578,13 +2552,15 @@ header{
           <div class="mini-logo"><img id="branchMainLogo" src="" alt="Logo de la empresa" referrerpolicy="no-referrer"></div>
           <h2 id="branchMainTitle" class="branch-main-title">Rifas</h2>
         </div>
-        
-        <button id="winnersBubble" class="winners-premium-btn" aria-label="Ver últimos ganadores">
-          <i>✨</i>
-          <span>Ganadores</span>
-        </button>
+        <div id="winnersBubble" class="winners-bubble-wrap" role="button" aria-label="Ver últimos ganadores">
+          <div class="winners-bubble">
+            <div class="winners-bubble-inner">
+              <img id="winnersBubbleImg" src="" alt="Ganadores">
+            </div>
+          </div>
+          <span class="winners-text">Ganadores</span>
+        </div>
       </div>
-      <div id="branchGrid" class="branch-grid"></div>
 
 <div id="branchScrollIndicator" class="branch-scroll-indicator premium-ghost" aria-hidden="true">
   <div class="ghost-hand-container">
@@ -3525,16 +3501,103 @@ async function loadLogoFast(){
   }catch(_){}
 }
 
- 
-  
-  // 2. FRENO DE MANO: Matamos la animación exacta en curso si el usuario toca la pantalla
-  if (currentGlideFrame) {
-    cancelAnimationFrame(currentGlideFrame);
-    currentGlideFrame = null;
+    /* =========================================================
+   🔥 LÓGICA DE ÚLTIMOS GANADORES
+   ========================================================= */
+let winnersImages = [];
+let winnersAutoPlayTimer = null;
+
+async function loadWinnersFast() {
+  try {
+    // Rango AE2:AI2 en la hoja Configuracion
+    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
+    const rows = parseCSV(txt);
     
-    // Devolvemos el imán nativo inmediatamente para que el dedo del usuario tome el control fluido
-    const track = document.getElementById('winnersTrack');
-    if (track) track.style.scrollSnapType = 'x mandatory';
+    // Extraer la fila de datos (puede ser el index 0 o 1 dependiendo de los headers de Sheets)
+    const dataRow = rows.length > 1 ? rows[1] : rows[0];
+    if (!dataRow) return;
+
+    // Filtrar celdas vacías y guardar las URLs válidas
+    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
+
+    if (winnersImages.length > 0) {
+      // Activar la burbuja
+      const bubble = document.getElementById('winnersBubble');
+      const bubbleImg = document.getElementById('winnersBubbleImg');
+      if (bubble && bubbleImg) {
+        bubbleImg.src = winnersImages[0]; // Mostrar la primera imagen en la burbuja
+        bubble.classList.add('show');
+      }
+      buildWinnersCarousel();
+    }
+  } catch (error) {
+    console.log('No se pudieron cargar los ganadores', error);
+  }
+}
+
+function buildWinnersCarousel() {
+  const track = document.getElementById('winnersTrack');
+  const bubble = document.getElementById('winnersBubble');
+  const lightbox = document.getElementById('winnersLightbox');
+  const closeBtn = document.getElementById('winnersClose');
+  
+  if (!track || !bubble || !lightbox) return;
+
+  // Limpiar y construir slides
+  track.innerHTML = '';
+  winnersImages.forEach(url => {
+    const slide = document.createElement('div');
+    slide.className = 'winner-slide';
+    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
+    track.appendChild(slide);
+  });
+
+  // Abrir Lightbox
+  bubble.addEventListener('click', () => {
+    lightbox.classList.add('show');
+    lightbox.setAttribute('aria-hidden', 'false');
+    startWinnersAutoPlay();
+  });
+
+  // Cerrar Lightbox
+  const closeCarousel = () => {
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
+    stopWinnersAutoPlay();
+    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300); // Reset al cerrar
+  };
+
+  closeBtn.addEventListener('click', closeCarousel);
+  
+  // Pausar auto-play si el usuario interactúa (toca o arrastra)
+  track.addEventListener('touchstart', stopWinnersAutoPlay, { passive: true });
+  track.addEventListener('mousedown', stopWinnersAutoPlay, { passive: true });
+}
+
+function startWinnersAutoPlay() {
+  const track = document.getElementById('winnersTrack');
+  if (!track || winnersImages.length <= 1) return;
+  
+  stopWinnersAutoPlay(); // Limpiar timers anteriores
+  
+  winnersAutoPlayTimer = setInterval(() => {
+    const slideWidth = track.clientWidth;
+    const currentScroll = track.scrollLeft;
+    const maxScroll = track.scrollWidth - slideWidth;
+    
+    // Si llegó al final, vuelve al inicio, sino avanza un slide
+    if (currentScroll >= maxScroll - 10) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+    }
+  }, 3500); // Cambia de imagen cada 3.5 segundos
+}
+
+function stopWinnersAutoPlay() {
+  if (winnersAutoPlayTimer) {
+    clearInterval(winnersAutoPlayTimer);
+    winnersAutoPlayTimer = null;
   }
 }
 
@@ -4106,11 +4169,11 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   window.addEventListener('resize', ()=>requestAnimationFrame(applyViewportOffset), { passive:true });
 
   // Carga base (config + logo) en paralelo para que boot se vea pro y rápido
-  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección, logo y ganadores');
+  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección y logo');
   await Promise.allSettled([
     loadConfigFast(),
-    loadLogoFast(),   // <--- ¡AQUÍ ESTÁ LA COMA QUE FALTABA!
-    loadWinnersFast() // <-- LA NUEVA MAGIA AQUÍ
+    loadLogoFast()
+    loadWinnersFast()
   ]);
 
   // Título boot con el nombre (si ya está disponible)
@@ -4272,124 +4335,13 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   setTimeout(()=> bootHide(), 220);
 
   // Refrescos suaves
-  // Refrescos suaves
   GRID_TIMER=setInterval(()=>renderGrid(), 20000);
   MAP_TIMER=setInterval(async ()=>{
     const nowKey=todayKey();
     if(nowKey!==DAY_MARK){ DAY_MARK=nowKey; await syncMapFast(); DAILY=[]; pickDaily(true); renderGrid(); return; }
     const before=DAILY.length; await syncMapFast(); if(DAILY.length!==before){ renderGrid(); }
   }, 20000);
-
-}); // <--- AQUÍ CIERRA TU APLICACIÓN PRINCIPAL (DOM)
-
-/* =========================================================
-   🏆 LÓGICA DE ÚLTIMOS GANADORES (Neón Premium & Interacción)
-   ========================================================= */
-let winnersImages = [];
-let winnersAutoPlayTimer = null;
-let winnersResumeTimer = null;
-
-async function loadWinnersFast() {
-  try {
-    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
-    const rows = parseCSV(txt);
-    const dataRow = rows.length > 1 ? rows[1] : rows[0];
-    if (!dataRow) return;
-
-    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
-
-    if (winnersImages.length > 0) {
-      const bubble = document.getElementById('winnersBubble');
-      if (bubble) {
-        bubble.classList.add('show');
-      }
-      buildWinnersCarousel();
-    }
-  } catch (error) {
-    console.log('Sin ganadores configurados');
-  }
-}
-
-function buildWinnersCarousel() {
-  const track = document.getElementById('winnersTrack');
-  const bubble = document.getElementById('winnersBubble');
-  const lightbox = document.getElementById('winnersLightbox');
-  const closeBtn = document.getElementById('winnersClose');
-  
-  if (!track || !bubble || !lightbox) return;
-
-  track.innerHTML = '';
-  winnersImages.forEach(url => {
-    const slide = document.createElement('div');
-    slide.className = 'winner-slide';
-    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
-    track.appendChild(slide);
-  });
-
-  track.style.scrollBehavior = 'smooth';
-
-  bubble.addEventListener('click', () => {
-    lightbox.classList.add('show');
-    lightbox.setAttribute('aria-hidden', 'false');
-    startWinnersAutoPlay();
-  });
-
-  const closeCarousel = () => {
-    if (document.activeElement === closeBtn) closeBtn.blur();
-    lightbox.classList.remove('show');
-    lightbox.setAttribute('aria-hidden', 'true');
-    stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer);
-    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
-  };
-
-  closeBtn.addEventListener('click', closeCarousel);
-
-  const onHumanTouchStart = () => {
-    stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer);
-  };
-
-  const onHumanTouchEnd = () => {
-    clearTimeout(winnersResumeTimer);
-    winnersResumeTimer = setTimeout(() => {
-      startWinnersAutoPlay();
-    }, 6000);
-  };
-
-  track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
-  track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
-  track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
-  track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
-  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
-}
-
-function startWinnersAutoPlay() {
-  const track = document.getElementById('winnersTrack');
-  if (!track || winnersImages.length <= 1) return;
-  
-  stopWinnersAutoPlay(); 
-  
-  winnersAutoPlayTimer = setInterval(() => {
-    const slideWidth = track.clientWidth;
-    const currentScroll = track.scrollLeft;
-    const maxScroll = track.scrollWidth - slideWidth;
-    
-    if (currentScroll >= maxScroll - 10) {
-      track.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
-    }
-  }, 3000);
-}
-
-function stopWinnersAutoPlay() {
-  if (winnersAutoPlayTimer) {
-    clearInterval(winnersAutoPlayTimer);
-    winnersAutoPlayTimer = null;
-  }
-}
-</script>
+});
   </script>
 </body>
 </html>
