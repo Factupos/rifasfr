@@ -396,7 +396,7 @@ transform:scale(.92);
 .search-bar {
   width: 100%; height: 46px; /* Más delgado para ahorrar espacio */
   border-radius: 12px; border: 1px solid var(--panel-border);
-  padding: 0 14px; font-size: 16px; line-height: 46px; outline: none; 
+  padding: 0 16px; font-size: 16px; line-height: 46px; outline: none; 
   background: rgba(255,255,255,0.08); color: var(--ink);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.10), 0 4px 15px rgba(0,0,0,.2);
   caret-color: #ffffff; -webkit-appearance: none; appearance: none;
@@ -473,7 +473,7 @@ transform:scale(.92);
 .random-button {
   flex: 1 1 0 !important; /* Fuerza a compartir el espacio al 50% */
   min-width: 0;
-  height: 54px; /* Botón más alto y fácil de tocar */
+  height: 62px; /* Botón más alto y fácil de tocar */
   border-radius: 16px;
   font-weight: 900; font-size: 14px; letter-spacing: 1px;
   text-transform: uppercase; border: none; cursor: pointer;
@@ -620,7 +620,7 @@ body.search-has-text #raffles{ display:none !important; }
 
 .cart-item-remove {
   border: none; outline: none; cursor: pointer;
-  width: 26px; height: 26px;
+  width: 26px; height: 29px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; font-weight: 900;
@@ -1099,7 +1099,7 @@ body.search-has-text #raffles{ display:none !important; }
 .branch-main-title{
   margin:0; font-size:clamp(22px, 6vw, 32px); font-weight:1000; 
   letter-spacing:0.5px; text-transform:uppercase; color:#ffffff;
-  text-shadow: 0 6px 16px rgba(0,0,0,.5); text-align: left; line-height: 1.1;
+  text-shadow: 0 6px 16px rgba(0,0,0,.5); text-align: left; line-height: 1.1; flex:1; min-width:0;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
@@ -1449,7 +1449,7 @@ body.search-has-text #raffles{ display:none !important; }
 }
 
 @media (max-width:380px){
-  .branch-brand .mini-logo{ width: 60px; height: 60px; }
+  .branch-brand .mini-logo{ width: 60px; height: 68px; }
   .branch-grid{ gap:12px; }
   .branch-card{ padding:12px; border-radius: 24px; min-height: 250px;}
 }
@@ -1963,7 +1963,7 @@ body.search-has-text #raffles{ display:none !important; }
   }
   .branch-tap-shell{ width: 132px; height: 156px; }
   .branch-tap-hand-wrap{ right: -14px; top: 9px; width: 118px; height: 160px; }
-  .branch-tap-press-zone{ left: 8px; top: -16px; width: 52px; height: 52px; }
+  .branch-tap-press-zone{ left: 8px; top: -16px; width: 52px; height: 60px; }
 }
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
@@ -2388,6 +2388,563 @@ header{
   }
 }
 
+    /* =========================================================
+/* =========================================================
+   🏆 BOTÓN GANADORES ADAPTADO DEL ORIGINAL
+   ========================================================= */
+.branch-topbar{
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 340px);
+  align-items: center;
+  column-gap: 8px;
+  width: 100%;
+  max-width: 760px;
+  margin-bottom: 18px;
+  min-height: 124px;
+  animation: fadeSlideDown 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.branch-brand{
+  grid-column: 1;
+  justify-self: start;
+  min-width: 0;
+  display:flex; flex-direction:row; align-items:center; justify-content:flex-start; gap:14px;
+}
+
+.winners-premium-btn{
+  --gold-1:#fff3c7;
+  --gold-2:#ffd978;
+  --gold-3:#ffbe3b;
+  --gold-4:#ff9f0a;
+  --gold-5:#e07a00;
+  --metal-1:#ffb347;
+  --metal-2:#ff9626;
+  --metal-3:#f57c00;
+  --metal-4:#c85f00;
+  --dark-line: rgba(255, 153, 51, 0.95);
+  --gold-line: rgba(255, 184, 35, 0.95);
+
+  grid-column: 2;
+  justify-self: end;
+  align-self: center;
+  transform: translateX(-10px) scale(1.12);
+  transform-origin: center;
+  position: relative;
+  display: none;
+  width: 255px;
+  height: 87px;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 15;
+  overflow: visible;
+  isolation: isolate;
+  touch-action: manipulation;
+  transform: translateZ(0);
+}
+
+.winners-premium-btn.show{
+  display: inline-flex;
+}
+
+.winners-premium-btn > img{
+  display:none !important;
+}
+
+.winners-premium-btn .button-wrapper{
+  position:relative;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  width:320px;
+  height:108px;
+  isolation:isolate;
+  pointer-events:none;
+}
+
+.winners-premium-btn .button-wrapper::before{
+  content:"";
+  position:absolute;
+  inset:18px 54px;
+  border-radius:999px;
+  background: radial-gradient(circle at center, rgba(255, 183, 43, 0.16), rgba(255, 183, 43, 0.03) 55%, transparent 75%);
+  filter: blur(10px);
+  animation: auraPulse 3.4s ease-in-out infinite;
+  z-index:0;
+}
+
+.winners-premium-btn .orbits-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+  overflow:visible;
+}
+
+.winners-premium-btn .orbit-dark{
+  stroke: var(--dark-line);
+  opacity:.92;
+  filter:
+    drop-shadow(0 0 3px rgba(255, 140, 0, .18))
+    drop-shadow(0 0 6px rgba(255, 140, 0, .10));
+}
+
+.winners-premium-btn .orbit-gold{
+  stroke: var(--gold-line);
+  filter:
+    drop-shadow(0 0 3px rgba(255, 179, 36, 0.22))
+    drop-shadow(0 0 8px rgba(255, 179, 36, 0.12));
+  animation: orbitGlow 2.8s ease-in-out infinite alternate;
+}
+
+.winners-premium-btn .orbit-dot-dark{
+  fill:#ff9a2f;
+  opacity:.98;
+  filter:
+    drop-shadow(0 0 3px rgba(255, 145, 0, .24))
+    drop-shadow(0 0 6px rgba(255, 145, 0, .14));
+  animation: nodePulseSoft 3.6s ease-in-out infinite;
+}
+
+.winners-premium-btn .orbit-dot-gold{
+  fill:#ffb224;
+  filter:
+    drop-shadow(0 0 5px rgba(255,178,36,.35))
+    drop-shadow(0 0 10px rgba(255,178,36,.20));
+  animation: nodePulseGold 2.4s ease-in-out infinite alternate;
+}
+
+.winners-premium-btn .winner-btn{
+  position:relative;
+  z-index:2;
+  min-width:194px;
+  height:55px;
+  padding:0 30px;
+  border:none;
+  border-radius:999px;
+  overflow:hidden;
+  user-select:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#ffffff;
+  font-family:"Arial Black", "Montserrat", "Segoe UI", sans-serif;
+  font-size:18.8px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,0) 18%),
+    linear-gradient(145deg, var(--metal-1) 0%, var(--metal-2) 24%, var(--metal-3) 62%, var(--metal-4) 100%);
+
+  text-shadow:
+    0 0 8px rgba(255, 200, 94, 0.30),
+    0 0 18px rgba(255, 171, 32, 0.22);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.35),
+    inset 0 6px 10px rgba(255,255,255,0.12),
+    inset 0 -6px 10px rgba(140,55,0,0.30),
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 18px rgba(0,0,0,0.18),
+    0 6px 24px rgba(255,176,42,0.16);
+
+  transition:
+    transform .32s cubic-bezier(.22,.9,.2,1),
+    box-shadow .32s cubic-bezier(.22,.9,.2,1),
+    filter .32s cubic-bezier(.22,.9,.2,1),
+    letter-spacing .24s ease;
+
+  animation: heroFloat 3.6s ease-in-out infinite;
+}
+
+.winners-premium-btn .winner-btn::before{
+  content:"";
+  position:absolute;
+  inset:1.5px;
+  border-radius:inherit;
+  padding:1px;
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,.55) 0%,
+      rgba(255,214,112,.55) 18%,
+      rgba(255,165,26,.50) 48%,
+      rgba(255,255,255,.12) 82%,
+      rgba(255,255,255,.26) 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:.95;
+  pointer-events:none;
+}
+
+.winners-premium-btn .winner-btn::after{
+  content:"";
+  position:absolute;
+  top:4px;
+  left:10px;
+  right:10px;
+  height:42%;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0));
+  filter: blur(.4px);
+  pointer-events:none;
+}
+
+.winners-premium-btn .sheen{
+  position:absolute;
+  top:-20%;
+  left:-42%;
+  width:34%;
+  height:140%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.06) 18%,
+    rgba(255,245,210,.55) 50%,
+    rgba(255,255,255,.10) 72%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-24deg);
+  filter: blur(1px);
+  animation: sheenSweep 4.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.winners-premium-btn .inner-glow{
+  position:absolute;
+  inset:6px 12px;
+  border-radius:999px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 205, 94, 0.20), rgba(255, 205, 94, 0.06) 45%, transparent 72%);
+  filter: blur(7px);
+  pointer-events:none;
+  animation: innerPulse 2.8s ease-in-out infinite;
+}
+
+.winners-premium-btn .label{
+  position:relative;
+  z-index:2;
+  display:inline-block;
+  background: linear-gradient(180deg, #ffffff 0%, #ffe8ad 55%, #ffc544 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:
+    0 0 10px rgba(255, 191, 66, 0.20),
+    0 1px 0 rgba(255,255,255,0.10);
+  animation: textGlow 2.7s ease-in-out infinite alternate;
+  white-space:nowrap;
+}
+
+.winners-premium-btn .ambient-reflection{
+  position:absolute;
+  left:56px;
+  right:56px;
+  bottom:7px;
+  height:14px;
+  border-radius:999px;
+  background: radial-gradient(circle at center, rgba(255, 179, 36, 0.20), rgba(255, 179, 36, 0.06) 45%, transparent 72%);
+  filter: blur(10px);
+  opacity:.85;
+  animation: reflectionPulse 3.2s ease-in-out infinite;
+  z-index:0;
+  pointer-events:none;
+}
+
+.winners-premium-btn:hover .winner-btn,
+.winners-premium-btn:focus-visible .winner-btn{
+  transform: translateY(-2px) scale(1.018);
+  letter-spacing:1.56px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.42),
+    inset 0 8px 14px rgba(255,255,255,0.14),
+    inset 0 -8px 12px rgba(140,55,0,0.28),
+    inset 0 0 0 1px rgba(255,255,255,0.08),
+    0 14px 22px rgba(0,0,0,0.20),
+    0 8px 30px rgba(255,176,42,0.24),
+    0 0 0 1px rgba(255,190,59,.08);
+  filter: saturate(1.06) brightness(1.02);
+}
+
+.winners-premium-btn:hover .inner-glow,
+.winners-premium-btn:focus-visible .inner-glow{
+  opacity:1;
+  transform:scale(1.03);
+}
+
+.winners-premium-btn:active .winner-btn{
+  transform: translateY(1px) scale(0.992);
+  box-shadow:
+    inset 0 2px 8px rgba(120,50,0,0.28),
+    inset 0 10px 18px rgba(120,50,0,0.10),
+    inset 0 -4px 8px rgba(255,255,255,0.05),
+    0 8px 14px rgba(0,0,0,0.16),
+    0 6px 20px rgba(255,176,42,0.14);
+  filter: brightness(.98);
+}
+
+.winners-premium-btn:focus-visible{
+  outline:none;
+}
+
+@keyframes auraPulse{
+  0%,100%{ transform:scale(0.96); opacity:.7; }
+  50%{ transform:scale(1.03); opacity:1; }
+}
+@keyframes orbitGlow{
+  0%{
+    opacity:.75;
+    filter:
+      drop-shadow(0 0 3px rgba(255, 179, 36, 0.18))
+      drop-shadow(0 0 8px rgba(255, 179, 36, 0.08));
+  }
+  100%{
+    opacity:1;
+    filter:
+      drop-shadow(0 0 6px rgba(255, 179, 36, 0.38))
+      drop-shadow(0 0 14px rgba(255, 179, 36, 0.18));
+  }
+}
+@keyframes nodePulseSoft{
+  0%,100%{ transform:scale(.92); opacity:.78; }
+  50%{ transform:scale(1.05); opacity:1; }
+}
+@keyframes nodePulseGold{
+  0%{ transform:scale(.88); opacity:.85; }
+  100%{ transform:scale(1.12); opacity:1; }
+}
+@keyframes heroFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-1.5px); }
+}
+@keyframes sheenSweep{
+  0%{ left:-42%; opacity:0; }
+  8%{ opacity:.18; }
+  18%{ opacity:.95; }
+  32%{ left:112%; opacity:0; }
+  100%{ left:112%; opacity:0; }
+}
+@keyframes innerPulse{
+  0%,100%{ opacity:.72; transform:scale(0.98); }
+  50%{ opacity:1; transform:scale(1.02); }
+}
+@keyframes textGlow{
+  0%{ filter: drop-shadow(0 0 2px rgba(255, 189, 56, 0.18)); }
+  100%{ filter: drop-shadow(0 0 6px rgba(255, 189, 56, 0.38)); }
+}
+@keyframes reflectionPulse{
+  0%,100%{ transform:scaleX(.94); opacity:.60; }
+  50%{ transform:scaleX(1.03); opacity:.95; }
+}
+
+@media (max-width: 768px){
+  .branch-topbar{
+    grid-template-columns: minmax(0, 1fr) 240px;
+    min-height: 104px;
+    margin-bottom: 14px;
+    column-gap: 8px;
+  }
+
+  .winners-premium-btn{
+    width: 240px;
+    height: 78px;
+    transform: translate3d(-16px, 0, 0);
+  }
+
+  .winners-premium-btn .button-wrapper{
+    width: 216px;
+    height: 78px;
+  }
+
+  .winners-premium-btn .button-wrapper::before{
+    inset: 14px 42px;
+    filter: blur(8px);
+  }
+
+  .winners-premium-btn .winner-btn{
+    min-width: 146px;
+    height: 42px;
+    padding: 0 19px;
+    font-size: 13.6px;
+    letter-spacing: 1.28px;
+  }
+
+  .winners-premium-btn .winner-btn::after{
+    top: 3px;
+    left: 8px;
+    right: 8px;
+  }
+
+  .winners-premium-btn .inner-glow{
+    inset: 5px 9px;
+    filter: blur(6px);
+  }
+
+  .winners-premium-btn .ambient-reflection{
+    left: 38px;
+    right: 38px;
+    bottom: 5px;
+    height: 11px;
+    filter: blur(8px);
+  }
+
+  .winners-premium-btn .orbits-svg{
+    transform: scale(1.01);
+  }
+}
+
+@media (max-width: 560px){
+  .branch-topbar{
+    grid-template-columns: minmax(0, 1fr) 210px;
+    min-height: 96px;
+    column-gap: 8px;
+  }
+
+  .winners-premium-btn{
+    width: 210px;
+    height: 68px;
+    transform: translate3d(-12px, 0, 0);
+  }
+
+  .winners-premium-btn .button-wrapper{
+    width: 188px;
+    height: 68px;
+  }
+
+  .winners-premium-btn .button-wrapper::before{
+    inset: 12px 36px;
+  }
+
+  .winners-premium-btn .winner-btn{
+    min-width: 128px;
+    height: 37px;
+    padding: 0 16px;
+    font-size: 11.8px;
+    letter-spacing: 1.05px;
+  }
+
+  .winners-premium-btn .ambient-reflection{
+    left: 32px;
+    right: 32px;
+  }
+}
+
+@media (max-width: 420px){
+  .branch-topbar{
+    grid-template-columns: minmax(0, 1fr) 198px;
+    min-height: 90px;
+    column-gap: 8px;
+  }
+
+  .winners-premium-btn{
+    width: 198px;
+    height: 64px;
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  .winners-premium-btn .button-wrapper{
+    width: 176px;
+    height: 64px;
+  }
+
+  .winners-premium-btn .winner-btn{
+    min-width: 120px;
+    height: 34px;
+    font-size: 11.1px;
+    letter-spacing: .98px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .winners-premium-btn .button-wrapper::before,
+  .winners-premium-btn .orbit-gold,
+  .winners-premium-btn .orbit-dot-dark,
+  .winners-premium-btn .orbit-dot-gold,
+  .winners-premium-btn .winner-btn,
+  .winners-premium-btn .sheen,
+  .winners-premium-btn .inner-glow,
+  .winners-premium-btn .label,
+  .winners-premium-btn .ambient-reflection{
+    animation:none !important;
+  }
+  .winners-premium-btn .winner-btn{
+    transition:none;
+  }
+}
+.winners-lightbox {
+  position: fixed; inset: 0; z-index: 1000000;
+  background: rgba(4, 10, 24, 0.95);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  display: none; flex-direction: column;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.winners-lightbox.show { display: flex; opacity: 1; }
+
+.winners-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 20px 0; flex-shrink: 0;
+}
+.winners-title {
+  color: #fff; font-size: 18px; font-weight: 900;
+  background: linear-gradient(90deg, #FFD700, #FFF8DC);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.winners-close {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  width: 40px; height: 40px; border-radius: 50%; color: #fff;
+  font-size: 24px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; backdrop-filter: blur(10px);
+}
+.winners-close:active { transform: scale(0.9); }
+
+.winners-track {
+  display: flex; flex: 1; overflow-x: auto;
+  scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  align-items: center; padding: 0 10px; gap: 10px;
+}
+.winners-track::-webkit-scrollbar { display: none; }
+
+.winner-slide {
+  flex: 0 0 100%; height: 80vh; scroll-snap-align: center;
+  display: flex; align-items: center; justify-content: center;
+  perspective: 1000px; /* Le da profundidad 3D */
+}
+
+.winner-slide img {
+  max-width: 90%; max-height: 100%; object-fit: contain;
+  border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  
+  /* MAGIA PREMIUM: Efecto de desenfoque y escala por defecto */
+  transform: scale(0.85);
+  opacity: 0.3;
+  filter: blur(8px);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.8s ease,
+              filter 0.8s ease;
+  will-change: transform, opacity, filter;
+}
+
+/* Cuando la imagen entra al centro de la pantalla */
+.winner-slide.active img {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0px);
+}
 </style>
 
 </head>
@@ -2439,15 +2996,39 @@ header{
 
  <div id="branchShell" class="branch-shell" aria-live="polite">
     <div class="branch-inner">
-      <div class="branch-topbar">
+    <div class="branch-topbar">
         <div class="branch-brand">
           <div class="mini-logo"><img id="branchMainLogo" src="" alt="Logo de la empresa" referrerpolicy="no-referrer"></div>
           <h2 id="branchMainTitle" class="branch-main-title">Rifas</h2>
         </div>
+        
+        <button id="winnersBubble" class="winners-premium-btn" aria-label="Ver últimos ganadores" type="button">
+          <img id="winnersBubbleImg" src="" alt="Ganadores">
+          <div class="button-wrapper" aria-hidden="true">
+            <svg class="orbits-svg" viewBox="0 0 440 140" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <path class="orbit-dark" d="M 170 25 L 350 25 A 45 45 0 0 1 395 70 A 45 45 0 0 1 380 100" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+              <path class="orbit-dark" d="M 270 115 L 90 115 A 45 45 0 0 1 45 70 A 45 45 0 0 1 60 40" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+              <path class="orbit-gold" d="M 30 55 A 40 40 0 0 1 70 15 L 370 15" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+              <path class="orbit-gold" d="M 410 85 A 40 40 0 0 1 370 125 L 70 125" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+              <circle class="orbit-dot-dark" cx="170" cy="25" r="4"/>
+              <circle class="orbit-dot-dark" cx="380" cy="100" r="4"/>
+              <circle class="orbit-dot-dark" cx="270" cy="115" r="4"/>
+              <circle class="orbit-dot-dark" cx="60" cy="40" r="4"/>
+              <circle class="orbit-dot-gold" cx="30" cy="70" r="9"/>
+              <circle class="orbit-dot-gold" cx="410" cy="70" r="9"/>
+              <circle class="orbit-dot-gold" cx="220" cy="15" r="5"/>
+              <circle class="orbit-dot-gold" cx="220" cy="125" r="5"/>
+            </svg>
+            <div class="winner-btn">
+              <span class="sheen"></span>
+              <span class="inner-glow"></span>
+              <span class="label">GANADORES</span>
+            </div>
+            <div class="ambient-reflection"></div>
+          </div>
+        </button>
       </div>
       <div id="branchGrid" class="branch-grid"></div>
-    </div>
-  </div>
 
 <div id="branchScrollIndicator" class="branch-scroll-indicator premium-ghost" aria-hidden="true">
   <div class="ghost-hand-container">
@@ -2547,7 +3128,13 @@ header{
   <!-- Mensajes -->
   <div id="message" class="message">Boleta ocupada</div>
   <div id="loadingMessage" class="loading-message">Buscando número aleatorio...</div>
-
+<div id="winnersLightbox" class="winners-lightbox" aria-hidden="true">
+    <div class="winners-header">
+      <div class="winners-title">✨ ÚLTIMOS GANADORES</div>
+      <button id="winnersClose" class="winners-close">&times;</button>
+    </div>
+    <div id="winnersTrack" class="winners-track"></div>
+  </div>
   <script>
 /* =========================================================
    ✅ CONFIG (VISIBLES AL INICIO — como pediste)
@@ -3381,6 +3968,138 @@ async function loadLogoFast(){
   }catch(_){}
 }
 
+
+    /* =========================================================
+   🔥 LÓGICA DE ÚLTIMOS GANADORES
+   ========================================================= */
+/* =========================================================
+   🏆 LÓGICA DE ÚLTIMOS GANADORES (Interacción Premium)
+   ========================================================= */
+let winnersImages = [];
+let winnersAutoPlayTimer = null;
+let winnersResumeTimer = null; // Controla la espera de 6 segundos
+
+async function loadWinnersFast() {
+  try {
+    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
+    const rows = parseCSV(txt);
+    const dataRow = rows.length > 1 ? rows[1] : rows[0];
+    if (!dataRow) return;
+
+    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
+
+    if (winnersImages.length > 0) {
+      const bubble = document.getElementById('winnersBubble');
+      const bubbleImg = document.getElementById('winnersBubbleImg');
+      if (bubble && bubbleImg) {
+        bubbleImg.src = winnersImages[0];
+        bubble.classList.add('show');
+      }
+      buildWinnersCarousel();
+    }
+  } catch (error) {
+    console.log('Sin ganadores configurados');
+  }
+}
+
+function buildWinnersCarousel() {
+  const track = document.getElementById('winnersTrack');
+  const bubble = document.getElementById('winnersBubble');
+  const lightbox = document.getElementById('winnersLightbox');
+  const closeBtn = document.getElementById('winnersClose');
+  if (!track || !bubble || !lightbox) return;
+
+  track.innerHTML = '';
+  
+  // Crear slides
+  winnersImages.forEach((url, index) => {
+    const slide = document.createElement('div');
+    slide.className = 'winner-slide';
+    if (index === 0) slide.classList.add('active'); // La primera activa por defecto
+    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
+    track.appendChild(slide);
+  });
+
+  // OBSERVER: Detecta de forma inteligente qué imagen está en el centro
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      } else {
+        entry.target.classList.remove('active');
+      }
+    });
+  }, {
+    root: track,
+    threshold: 0.55 // Se activa cuando más de la mitad de la foto está visible
+  });
+
+  document.querySelectorAll('.winner-slide').forEach(slide => observer.observe(slide));
+
+  bubble.addEventListener('click', () => {
+    lightbox.classList.add('show');
+    lightbox.setAttribute('aria-hidden', 'false');
+    startWinnersAutoPlay();
+  });
+
+  const closeCarousel = () => {
+    if (document.activeElement === closeBtn) closeBtn.blur();
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
+    stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer);
+    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
+  };
+
+  closeBtn.addEventListener('click', closeCarousel);
+
+  // Eventos para detectar toque humano y no interrumpir
+  const onHumanTouchStart = () => {
+    stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer);
+  };
+  const onHumanTouchEnd = () => {
+    clearTimeout(winnersResumeTimer);
+    winnersResumeTimer = setTimeout(() => {
+      startWinnersAutoPlay();
+    }, 6000);
+  };
+
+  track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
+  track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
+  track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
+  track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
+  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
+}
+
+function startWinnersAutoPlay() {
+  const track = document.getElementById('winnersTrack');
+  if (!track || winnersImages.length <= 1) return;
+  stopWinnersAutoPlay(); 
+
+  winnersAutoPlayTimer = setInterval(() => {
+    const slideWidth = track.clientWidth;
+    const currentScroll = track.scrollLeft;
+    const maxScroll = track.scrollWidth - slideWidth;
+    
+    // Si llegó a la última foto
+    if (currentScroll >= maxScroll - 10) {
+      // Regresa a la primera INSTANTÁNEAMENTE para evitar el "rebobinado" brusco
+      track.scrollTo({ left: 0, behavior: 'auto' });
+    } else {
+      // Avanza a la siguiente foto de manera natural
+      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+    }
+  }, 3000);
+}
+
+function stopWinnersAutoPlay() {
+  if (winnersAutoPlayTimer) {
+    clearInterval(winnersAutoPlayTimer);
+    winnersAutoPlayTimer = null;
+  }
+}
+
 /* =========================
    UI helpers
    ========================= */
@@ -3949,10 +4668,11 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   window.addEventListener('resize', ()=>requestAnimationFrame(applyViewportOffset), { passive:true });
 
   // Carga base (config + logo) en paralelo para que boot se vea pro y rápido
-  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección y logo');
+ bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección, logo y ganadores');
   await Promise.allSettled([
     loadConfigFast(),
-    loadLogoFast()
+    loadLogoFast(),   // <--- ¡AQUÍ ESTÁ LA COMA QUE FALTABA!
+    loadWinnersFast() // <-- LA NUEVA MAGIA AQUÍ
   ]);
 
   // Título boot con el nombre (si ya está disponible)
