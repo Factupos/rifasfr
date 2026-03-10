@@ -2388,170 +2388,6 @@ header{
   }
 }
 
-    /* =========================================================
-   🔥 BURBUJA DE GANADORES Y CARRUSEL PREMIUM
-   ========================================================= */
-/* Ajuste de la barra superior para separar el logo de la burbuja */
-/* =========================================================
-   🏆 BOTÓN GANADORES PREMIUM Y CARRUSEL
-   ========================================================= */
-.branch-topbar {
-  justify-content: space-between !important;
-  max-width: 100% !important;
-  padding: 0 5px;
-  width: 100%;
-}
-
-/* Píldora Elegante (Glassmorphism) */
-/* =========================================================
-   🏆 BOTÓN GANADORES: NEÓN PÚRPURA PREMIUM
-   ========================================================= */
-/* =========================================================
-   🏆 BOTÓN GANADORES: PREMIUM & ULTRA RÁPIDO (GPU Optimized)
-   ========================================================= */
-.winners-premium-btn {
-  display: none; /* Se mostrará con la clase .show */
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 24px;
-  /* Gradiente elegante que combina con tu botón aleatorio */
-  background: linear-gradient(135deg, #7B2CBF 0%, #0B5CFF 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  color: #ffffff;
-  font-weight: 900;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  z-index: 10;
-  /* Sombra estática (no animada) para ahorrar recursos */
-  box-shadow: 0 4px 15px rgba(11, 92, 255, 0.4);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Para que aparezca cuando el JS lo mande */
-.winners-premium-btn.show {
-  display: flex;
-}
-
-.winners-premium-btn img {
-  display: none !important; 
-}
-
-.winners-premium-btn span::before {
-  content: "🏆 "; /* Un trofeo rinde mejor que los destellos con drop-shadow */
-}
-
-.winners-premium-btn:active { 
-  transform: scale(0.92); 
-}
-
-/* EFECTO 1: Anillo expansivo (Pulso ligero y optimizado) */
-.winners-premium-btn::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 999px;
-  border: 2px solid rgba(123, 44, 191, 0.8);
-  opacity: 0;
-  /* Animamos SOLO transform y opacity (Costo de rendimiento casi cero) */
-  animation: fastPulseRing 2s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-/* EFECTO 2: Reflejo de cristal (Shine) ultra rápido */
-.winners-premium-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  /* Usamos translateX en lugar de 'left' para evitar el Reflow del navegador */
-  transform: skewX(-25deg) translateX(-250%);
-  animation: fastGlassShine 4s infinite;
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* Animaciones GPU-Accelerated */
-@keyframes fastPulseRing {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(1.15); opacity: 0; }
-}
-
-@keyframes fastGlassShine {
-  0% { transform: skewX(-25deg) translateX(-250%); }
-  15% { transform: skewX(-25deg) translateX(300%); }
-  100% { transform: skewX(-25deg) translateX(300%); }
-}
-
-/* Carrusel Fullscreen */
-.winners-lightbox {
-  position: fixed; inset: 0; z-index: 1000000;
-  background: rgba(4, 10, 24, 0.95);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  display: none; flex-direction: column;
-  opacity: 0; transition: opacity 0.3s ease;
-}
-.winners-lightbox.show { display: flex; opacity: 1; }
-
-.winners-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 20px 0; flex-shrink: 0;
-}
-.winners-title {
-  color: #fff; font-size: 18px; font-weight: 900;
-  background: linear-gradient(90deg, #FFD700, #FFF8DC);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.winners-close {
-  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-  width: 40px; height: 40px; border-radius: 50%; color: #fff;
-  font-size: 24px; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; backdrop-filter: blur(10px);
-}
-.winners-close:active { transform: scale(0.9); }
-
-.winners-track {
-  display: flex; flex: 1; overflow-x: auto;
-  scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch; scrollbar-width: none;
-  align-items: center; padding: 0 10px; gap: 10px;
-}
-.winners-track::-webkit-scrollbar { display: none; }
-
-.winner-slide {
-  flex: 0 0 100%; height: 80vh; scroll-snap-align: center;
-  display: flex; align-items: center; justify-content: center;
-  perspective: 1000px; /* Le da profundidad 3D */
-}
-
-.winner-slide img {
-  max-width: 90%; max-height: 100%; object-fit: contain;
-  border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.1);
-  
-  /* MAGIA PREMIUM: Efecto de desenfoque y escala por defecto */
-  transform: scale(0.85);
-  opacity: 0.3;
-  filter: blur(8px);
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 0.8s ease,
-              filter 0.8s ease;
-  will-change: transform, opacity, filter;
-}
-
-/* Cuando la imagen entra al centro de la pantalla */
-.winner-slide.active img {
-  transform: scale(1);
-  opacity: 1;
-  filter: blur(0px);
-}
 </style>
 
 </head>
@@ -2603,18 +2439,15 @@ header{
 
  <div id="branchShell" class="branch-shell" aria-live="polite">
     <div class="branch-inner">
-    <div class="branch-topbar">
+      <div class="branch-topbar">
         <div class="branch-brand">
           <div class="mini-logo"><img id="branchMainLogo" src="" alt="Logo de la empresa" referrerpolicy="no-referrer"></div>
           <h2 id="branchMainTitle" class="branch-main-title">Rifas</h2>
         </div>
-        
-        <button id="winnersBubble" class="winners-premium-btn" aria-label="Ver últimos ganadores">
-          <img id="winnersBubbleImg" src="" alt="Ganadores">
-          <span>Ganadores</span>
-        </button>
       </div>
       <div id="branchGrid" class="branch-grid"></div>
+    </div>
+  </div>
 
 <div id="branchScrollIndicator" class="branch-scroll-indicator premium-ghost" aria-hidden="true">
   <div class="ghost-hand-container">
@@ -2714,13 +2547,7 @@ header{
   <!-- Mensajes -->
   <div id="message" class="message">Boleta ocupada</div>
   <div id="loadingMessage" class="loading-message">Buscando número aleatorio...</div>
-<div id="winnersLightbox" class="winners-lightbox" aria-hidden="true">
-    <div class="winners-header">
-      <div class="winners-title">✨ ÚLTIMOS GANADORES</div>
-      <button id="winnersClose" class="winners-close">&times;</button>
-    </div>
-    <div id="winnersTrack" class="winners-track"></div>
-  </div>
+
   <script>
 /* =========================================================
    ✅ CONFIG (VISIBLES AL INICIO — como pediste)
@@ -3554,138 +3381,6 @@ async function loadLogoFast(){
   }catch(_){}
 }
 
-
-    /* =========================================================
-   🔥 LÓGICA DE ÚLTIMOS GANADORES
-   ========================================================= */
-/* =========================================================
-   🏆 LÓGICA DE ÚLTIMOS GANADORES (Interacción Premium)
-   ========================================================= */
-let winnersImages = [];
-let winnersAutoPlayTimer = null;
-let winnersResumeTimer = null; // Controla la espera de 6 segundos
-
-async function loadWinnersFast() {
-  try {
-    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
-    const rows = parseCSV(txt);
-    const dataRow = rows.length > 1 ? rows[1] : rows[0];
-    if (!dataRow) return;
-
-    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
-
-    if (winnersImages.length > 0) {
-      const bubble = document.getElementById('winnersBubble');
-      const bubbleImg = document.getElementById('winnersBubbleImg');
-      if (bubble && bubbleImg) {
-        bubbleImg.src = winnersImages[0];
-        bubble.classList.add('show');
-      }
-      buildWinnersCarousel();
-    }
-  } catch (error) {
-    console.log('Sin ganadores configurados');
-  }
-}
-
-function buildWinnersCarousel() {
-  const track = document.getElementById('winnersTrack');
-  const bubble = document.getElementById('winnersBubble');
-  const lightbox = document.getElementById('winnersLightbox');
-  const closeBtn = document.getElementById('winnersClose');
-  if (!track || !bubble || !lightbox) return;
-
-  track.innerHTML = '';
-  
-  // Crear slides
-  winnersImages.forEach((url, index) => {
-    const slide = document.createElement('div');
-    slide.className = 'winner-slide';
-    if (index === 0) slide.classList.add('active'); // La primera activa por defecto
-    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
-    track.appendChild(slide);
-  });
-
-  // OBSERVER: Detecta de forma inteligente qué imagen está en el centro
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      } else {
-        entry.target.classList.remove('active');
-      }
-    });
-  }, {
-    root: track,
-    threshold: 0.55 // Se activa cuando más de la mitad de la foto está visible
-  });
-
-  document.querySelectorAll('.winner-slide').forEach(slide => observer.observe(slide));
-
-  bubble.addEventListener('click', () => {
-    lightbox.classList.add('show');
-    lightbox.setAttribute('aria-hidden', 'false');
-    startWinnersAutoPlay();
-  });
-
-  const closeCarousel = () => {
-    if (document.activeElement === closeBtn) closeBtn.blur();
-    lightbox.classList.remove('show');
-    lightbox.setAttribute('aria-hidden', 'true');
-    stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer);
-    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
-  };
-
-  closeBtn.addEventListener('click', closeCarousel);
-
-  // Eventos para detectar toque humano y no interrumpir
-  const onHumanTouchStart = () => {
-    stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer);
-  };
-  const onHumanTouchEnd = () => {
-    clearTimeout(winnersResumeTimer);
-    winnersResumeTimer = setTimeout(() => {
-      startWinnersAutoPlay();
-    }, 6000);
-  };
-
-  track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
-  track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
-  track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
-  track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
-  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
-}
-
-function startWinnersAutoPlay() {
-  const track = document.getElementById('winnersTrack');
-  if (!track || winnersImages.length <= 1) return;
-  stopWinnersAutoPlay(); 
-
-  winnersAutoPlayTimer = setInterval(() => {
-    const slideWidth = track.clientWidth;
-    const currentScroll = track.scrollLeft;
-    const maxScroll = track.scrollWidth - slideWidth;
-    
-    // Si llegó a la última foto
-    if (currentScroll >= maxScroll - 10) {
-      // Regresa a la primera INSTANTÁNEAMENTE para evitar el "rebobinado" brusco
-      track.scrollTo({ left: 0, behavior: 'auto' });
-    } else {
-      // Avanza a la siguiente foto de manera natural
-      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
-    }
-  }, 3000);
-}
-
-function stopWinnersAutoPlay() {
-  if (winnersAutoPlayTimer) {
-    clearInterval(winnersAutoPlayTimer);
-    winnersAutoPlayTimer = null;
-  }
-}
-
 /* =========================
    UI helpers
    ========================= */
@@ -4254,11 +3949,10 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   window.addEventListener('resize', ()=>requestAnimationFrame(applyViewportOffset), { passive:true });
 
   // Carga base (config + logo) en paralelo para que boot se vea pro y rápido
- bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección, logo y ganadores');
+  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección y logo');
   await Promise.allSettled([
     loadConfigFast(),
-    loadLogoFast(),   // <--- ¡AQUÍ ESTÁ LA COMA QUE FALTABA!
-    loadWinnersFast() // <-- LA NUEVA MAGIA AQUÍ
+    loadLogoFast()
   ]);
 
   // Título boot con el nombre (si ya está disponible)
