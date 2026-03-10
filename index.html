@@ -3487,9 +3487,12 @@ async function loadLogoFast(){
 /* =========================================================
    🏆 LÓGICA DE ÚLTIMOS GANADORES (Corregida)
    ========================================================= */
+/* =========================================================
+   🏆 LÓGICA DE ÚLTIMOS GANADORES (Interacción Premium)
+   ========================================================= */
 let winnersImages = [];
 let winnersAutoPlayTimer = null;
-let currentGlideFrame = null;
+let winnersResumeTimer = null; // Controla la espera de 6 segundos
 
 async function loadWinnersFast() {
   try {
@@ -3530,6 +3533,9 @@ function buildWinnersCarousel() {
     track.appendChild(slide);
   });
 
+  // Forzamos la suavidad nativa del sistema operativo para evitar saltos bruscos
+  track.style.scrollBehavior = 'smooth';
+
   bubble.addEventListener('click', () => {
     lightbox.classList.add('show');
     lightbox.setAttribute('aria-hidden', 'false');
@@ -3537,75 +3543,71 @@ function buildWinnersCarousel() {
   });
 
   const closeCarousel = () => {
-    // 🔥 SOLUCIÓN AL ERROR DE CONSOLA: Quita el foco del botón "X"
     if (document.activeElement === closeBtn) closeBtn.blur();
-    
     lightbox.classList.remove('show');
     lightbox.setAttribute('aria-hidden', 'true');
     stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer); // Apagamos el reinicio si cierra el carrusel
     setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
   };
 
   closeBtn.addEventListener('click', closeCarousel);
-  track.addEventListener('touchstart', stopWinnersAutoPlay, { passive: true });
-  track.addEventListener('mousedown', stopWinnersAutoPlay, { passive: true });
+
+  // === DETECCIÓN INTELIGENTE DE TOQUE HUMANO ===
+  
+  // 1. Cuando el usuario pone el dedo (o hace clic)
+  const onHumanTouchStart = () => {
+    stopWinnersAutoPlay(); // Frena la animación de inmediato
+    clearTimeout(winnersResumeTimer); // Cancela cualquier reinicio pendiente
+  };
+
+  // 2. Cuando el usuario quita el dedo (suelta la pantalla)
+  const onHumanTouchEnd = () => {
+    clearTimeout(winnersResumeTimer);
+    // Programa el arranque automático exactamente 6 segundos (6000ms) después
+    winnersResumeTimer = setTimeout(() => {
+      startWinnersAutoPlay();
+    }, 6000);
+  };
+
+  // Eventos de entrada (poner el dedo)
+  track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
+  track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
+
+  // Eventos de salida (quitar el dedo)
+  track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
+  track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
+  track.addEventListener('wheel', onHumanTouchEnd, { passive: true }); // Por si desliza en PC
 }
 
 function startWinnersAutoPlay() {
   const track = document.getElementById('winnersTrack');
   if (!track || winnersImages.length <= 1) return;
   
-  stopWinnersAutoPlay(); // Limpia todo antes de arrancar
+  stopWinnersAutoPlay(); // Asegura que no se dupliquen velocidades
   
+  // Se mueve cada 3 segundos (3000ms)
   winnersAutoPlayTimer = setInterval(() => {
     const slideWidth = track.clientWidth;
     const currentScroll = track.scrollLeft;
     const maxScroll = track.scrollWidth - slideWidth;
     
-    let targetScroll = currentScroll + slideWidth;
-    
+    // Si llegó a la última foto, vuelve a la primera
     if (currentScroll >= maxScroll - 10) {
-      targetScroll = 0; 
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      // Avanza a la siguiente foto de manera natural
+      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
     }
-    
-    const startScroll = track.scrollLeft;
-    const distance = targetScroll - startScroll;
-    const duration = 1200; 
-    let startTime = null;
-
-    track.style.scrollSnapType = 'none';
-
-    function smoothGlide(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const progress = Math.min(timeElapsed / duration, 1);
-      
-      const ease = progress < 0.5 
-        ? 4 * progress * progress * progress 
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-
-      track.scrollLeft = startScroll + (distance * ease);
-
-      if (timeElapsed < duration) {
-        // Guardamos el ID de la animación para poder matarla si el humano toca la pantalla
-        currentGlideFrame = requestAnimationFrame(smoothGlide);
-      } else {
-        track.style.scrollSnapType = 'x mandatory';
-        currentGlideFrame = null; 
-      }
-    }
-    
-    currentGlideFrame = requestAnimationFrame(smoothGlide);
-
-  }, 4500); 
+  }, 3000);
 }
 
 function stopWinnersAutoPlay() {
-  // 1. Apagamos el temporizador (para que no intente pasar a la siguiente foto)
   if (winnersAutoPlayTimer) {
     clearInterval(winnersAutoPlayTimer);
     winnersAutoPlayTimer = null;
   }
+}
   
   // 2. FRENO DE MANO: Matamos la animación exacta en curso si el usuario toca la pantalla
   if (currentGlideFrame) {
