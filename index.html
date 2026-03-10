@@ -396,7 +396,7 @@ transform:scale(.92);
 .search-bar {
   width: 100%; height: 46px; /* Más delgado para ahorrar espacio */
   border-radius: 12px; border: 1px solid var(--panel-border);
-  padding: 0 14px; font-size: 16px; line-height: 46px; outline: none; 
+  padding: 0 16px; font-size: 16px; line-height: 46px; outline: none; 
   background: rgba(255,255,255,0.08); color: var(--ink);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.10), 0 4px 15px rgba(0,0,0,.2);
   caret-color: #ffffff; -webkit-appearance: none; appearance: none;
@@ -473,7 +473,7 @@ transform:scale(.92);
 .random-button {
   flex: 1 1 0 !important; /* Fuerza a compartir el espacio al 50% */
   min-width: 0;
-  height: 54px; /* Botón más alto y fácil de tocar */
+  height: 62px; /* Botón más alto y fácil de tocar */
   border-radius: 16px;
   font-weight: 900; font-size: 14px; letter-spacing: 1px;
   text-transform: uppercase; border: none; cursor: pointer;
@@ -620,7 +620,7 @@ body.search-has-text #raffles{ display:none !important; }
 
 .cart-item-remove {
   border: none; outline: none; cursor: pointer;
-  width: 26px; height: 26px;
+  width: 26px; height: 29px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; font-weight: 900;
@@ -1449,7 +1449,7 @@ body.search-has-text #raffles{ display:none !important; }
 }
 
 @media (max-width:380px){
-  .branch-brand .mini-logo{ width: 60px; height: 60px; }
+  .branch-brand .mini-logo{ width: 60px; height: 68px; }
   .branch-grid{ gap:12px; }
   .branch-card{ padding:12px; border-radius: 24px; min-height: 250px;}
 }
@@ -1963,7 +1963,7 @@ body.search-has-text #raffles{ display:none !important; }
   }
   .branch-tap-shell{ width: 132px; height: 156px; }
   .branch-tap-hand-wrap{ right: -14px; top: 9px; width: 118px; height: 160px; }
-  .branch-tap-press-zone{ left: 8px; top: -16px; width: 52px; height: 52px; }
+  .branch-tap-press-zone{ left: 8px; top: -16px; width: 52px; height: 60px; }
 }
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
@@ -2395,9 +2395,9 @@ header{
 .branch-topbar{
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(146px, 228px);
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 270px);
   align-items: center;
-  column-gap: 14px;
+  column-gap: 10px;
   width: 100%;
   max-width: 760px;
   margin-bottom: 18px;
@@ -2428,10 +2428,12 @@ header{
   grid-column: 2;
   justify-self: end;
   align-self: center;
+  transform: translateX(-10px) scale(1.12);
+  transform-origin: center;
   position: relative;
   display: none;
-  width: 228px;
-  height: 78px;
+  width: 255px;
+  height: 87px;
   padding: 0;
   margin: 0;
   appearance: none;
@@ -2460,8 +2462,8 @@ header{
   display:inline-flex;
   justify-content:center;
   align-items:center;
-  width:228px;
-  height:78px;
+  width:255px;
+  height:87px;
   isolation:isolate;
   pointer-events:none;
 }
@@ -2469,7 +2471,7 @@ header{
 .winners-premium-btn .button-wrapper::before{
   content:"";
   position:absolute;
-  inset:12px 42px;
+  inset:14px 46px;
   border-radius:999px;
   background: radial-gradient(circle at center, rgba(255, 183, 43, 0.16), rgba(255, 183, 43, 0.03) 55%, transparent 75%);
   filter: blur(10px);
@@ -2523,9 +2525,9 @@ header{
 .winners-premium-btn .winner-btn{
   position:relative;
   z-index:2;
-  min-width:142px;
-  height:39px;
-  padding:0 20px;
+  min-width:158px;
+  height:44px;
+  padding:0 22px;
   border:none;
   border-radius:999px;
   overflow:hidden;
@@ -2536,7 +2538,7 @@ header{
 
   color:#ffffff;
   font-family:"Arial Black", "Montserrat", "Segoe UI", sans-serif;
-  font-size:15px;
+  font-size:16px;
   font-weight:900;
   letter-spacing:1.45px;
   text-transform:uppercase;
@@ -2649,8 +2651,8 @@ header{
 
 .winners-premium-btn .ambient-reflection{
   position:absolute;
-  left:50px;
-  right:50px;
+  left:56px;
+  right:56px;
   bottom:7px;
   height:14px;
   border-radius:999px;
@@ -2750,14 +2752,14 @@ header{
 
 @media (max-width: 768px){
   .branch-topbar{
-    grid-template-columns: minmax(0, 1fr) 172px;
+    grid-template-columns: minmax(0, 1fr) 192px;
     min-height: 92px;
     margin-bottom: 14px;
-    column-gap: 12px;
+    column-gap: 8px;
   }
 
   .winners-premium-btn{
-    width: 172px;
+    width: 192px;
     height: 60px;
   }
 
@@ -2767,16 +2769,16 @@ header{
   }
 
   .winners-premium-btn .button-wrapper::before{
-    inset: 10px 30px;
+    inset: 11px 34px;
     filter: blur(8px);
   }
 
   .winners-premium-btn .winner-btn{
-    min-width: 108px;
-    height: 30px;
+    min-width: 118px;
+    height: 34px;
     padding: 0 14px;
-    font-size: 10.5px;
-    letter-spacing: 1.1px;
+    font-size: 11.2px;
+    letter-spacing: 1.15px;
   }
 
   .winners-premium-btn .winner-btn::after{
@@ -2791,27 +2793,27 @@ header{
   }
 
   .winners-premium-btn .ambient-reflection{
-    left: 34px;
-    right: 34px;
+    left: 38px;
+    right: 38px;
     bottom: 5px;
     height: 11px;
     filter: blur(8px);
   }
 
   .winners-premium-btn .orbits-svg{
-    transform: scale(.98);
+    transform: scale(1.01);
   }
 }
 
 @media (max-width: 560px){
   .branch-topbar{
-    grid-template-columns: minmax(0, 1fr) 154px;
+    grid-template-columns: minmax(0, 1fr) 176px;
     min-height: 84px;
     column-gap: 10px;
   }
 
   .winners-premium-btn{
-    width: 154px;
+    width: 176px;
     height: 54px;
   }
 
@@ -2821,32 +2823,32 @@ header{
   }
 
   .winners-premium-btn .button-wrapper::before{
-    inset: 9px 27px;
+    inset: 10px 31px;
   }
 
   .winners-premium-btn .winner-btn{
-    min-width: 96px;
-    height: 27px;
-    padding: 0 12px;
-    font-size: 9.5px;
+    min-width: 108px;
+    height: 31px;
+    padding: 0 14px;
+    font-size: 10.2px;
     letter-spacing: 1px;
   }
 
   .winners-premium-btn .ambient-reflection{
-    left: 28px;
-    right: 28px;
+    left: 32px;
+    right: 32px;
   }
 }
 
 @media (max-width: 420px){
   .branch-topbar{
-    grid-template-columns: minmax(0, 1fr) 146px;
+    grid-template-columns: minmax(0, 1fr) 168px;
     min-height: 80px;
     column-gap: 10px;
   }
 
   .winners-premium-btn{
-    width: 146px;
+    width: 168px;
     height: 52px;
   }
 
@@ -2856,9 +2858,9 @@ header{
   }
 
   .winners-premium-btn .winner-btn{
-    min-width: 92px;
+    min-width: 102px;
     height: 26px;
-    font-size: 9px;
+    font-size: 9.8px;
     letter-spacing: .9px;
   }
 }
