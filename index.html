@@ -3525,122 +3525,7 @@ async function loadLogoFast(){
   }catch(_){}
 }
 
-    /* =========================================================
-   🔥 LÓGICA DE ÚLTIMOS GANADORES
-   ========================================================= */
-/* =========================================================
-   🏆 LÓGICA DE ÚLTIMOS GANADORES (Corregida)
-   ========================================================= */
-/* =========================================================
-   🏆 LÓGICA DE ÚLTIMOS GANADORES (Interacción Premium)
-   ========================================================= */
-/* =========================================================
-   🏆 LÓGICA DE ÚLTIMOS GANADORES (Neón Premium & Interacción)
-   ========================================================= */
-let winnersImages = [];
-let winnersAutoPlayTimer = null;
-let winnersResumeTimer = null;
-
-async function loadWinnersFast() {
-  try {
-    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
-    const rows = parseCSV(txt);
-    const dataRow = rows.length > 1 ? rows[1] : rows[0];
-    if (!dataRow) return;
-
-    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
-
-    if (winnersImages.length > 0) {
-      const bubble = document.getElementById('winnersBubble');
-      if (bubble) {
-        bubble.classList.add('show');
-      }
-      buildWinnersCarousel();
-    }
-  } catch (error) {
-    console.log('Sin ganadores configurados');
-  }
-}
-
-function buildWinnersCarousel() {
-  const track = document.getElementById('winnersTrack');
-  const bubble = document.getElementById('winnersBubble');
-  const lightbox = document.getElementById('winnersLightbox');
-  const closeBtn = document.getElementById('winnersClose');
-  
-  if (!track || !bubble || !lightbox) return;
-
-  track.innerHTML = '';
-  winnersImages.forEach(url => {
-    const slide = document.createElement('div');
-    slide.className = 'winner-slide';
-    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
-    track.appendChild(slide);
-  });
-
-  track.style.scrollBehavior = 'smooth';
-
-  bubble.addEventListener('click', () => {
-    lightbox.classList.add('show');
-    lightbox.setAttribute('aria-hidden', 'false');
-    startWinnersAutoPlay();
-  });
-
-  const closeCarousel = () => {
-    if (document.activeElement === closeBtn) closeBtn.blur();
-    lightbox.classList.remove('show');
-    lightbox.setAttribute('aria-hidden', 'true');
-    stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer);
-    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
-  };
-
-  closeBtn.addEventListener('click', closeCarousel);
-
-  const onHumanTouchStart = () => {
-    stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer);
-  };
-
-  const onHumanTouchEnd = () => {
-    clearTimeout(winnersResumeTimer);
-    winnersResumeTimer = setTimeout(() => {
-      startWinnersAutoPlay();
-    }, 6000);
-  };
-
-  track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
-  track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
-  track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
-  track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
-  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
-}
-
-function startWinnersAutoPlay() {
-  const track = document.getElementById('winnersTrack');
-  if (!track || winnersImages.length <= 1) return;
-  
-  stopWinnersAutoPlay(); 
-  
-  winnersAutoPlayTimer = setInterval(() => {
-    const slideWidth = track.clientWidth;
-    const currentScroll = track.scrollLeft;
-    const maxScroll = track.scrollWidth - slideWidth;
-    
-    if (currentScroll >= maxScroll - 10) {
-      track.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
-    }
-  }, 3000);
-}
-
-function stopWinnersAutoPlay() {
-  if (winnersAutoPlayTimer) {
-    clearInterval(winnersAutoPlayTimer);
-    winnersAutoPlayTimer = null;
-  }
-}
+ 
   
   // 2. FRENO DE MANO: Matamos la animación exacta en curso si el usuario toca la pantalla
   if (currentGlideFrame) {
@@ -4387,6 +4272,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   setTimeout(()=> bootHide(), 220);
 
   // Refrescos suaves
+  // Refrescos suaves
   GRID_TIMER=setInterval(()=>renderGrid(), 20000);
   MAP_TIMER=setInterval(async ()=>{
     const nowKey=todayKey();
@@ -4394,7 +4280,116 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const before=DAILY.length; await syncMapFast(); if(DAILY.length!==before){ renderGrid(); }
   }, 20000);
 
-});
+}); // <--- AQUÍ CIERRA TU APLICACIÓN PRINCIPAL (DOM)
+
+/* =========================================================
+   🏆 LÓGICA DE ÚLTIMOS GANADORES (Neón Premium & Interacción)
+   ========================================================= */
+let winnersImages = [];
+let winnersAutoPlayTimer = null;
+let winnersResumeTimer = null;
+
+async function loadWinnersFast() {
+  try {
+    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
+    const rows = parseCSV(txt);
+    const dataRow = rows.length > 1 ? rows[1] : rows[0];
+    if (!dataRow) return;
+
+    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
+
+    if (winnersImages.length > 0) {
+      const bubble = document.getElementById('winnersBubble');
+      if (bubble) {
+        bubble.classList.add('show');
+      }
+      buildWinnersCarousel();
+    }
+  } catch (error) {
+    console.log('Sin ganadores configurados');
+  }
+}
+
+function buildWinnersCarousel() {
+  const track = document.getElementById('winnersTrack');
+  const bubble = document.getElementById('winnersBubble');
+  const lightbox = document.getElementById('winnersLightbox');
+  const closeBtn = document.getElementById('winnersClose');
+  
+  if (!track || !bubble || !lightbox) return;
+
+  track.innerHTML = '';
+  winnersImages.forEach(url => {
+    const slide = document.createElement('div');
+    slide.className = 'winner-slide';
+    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
+    track.appendChild(slide);
+  });
+
+  track.style.scrollBehavior = 'smooth';
+
+  bubble.addEventListener('click', () => {
+    lightbox.classList.add('show');
+    lightbox.setAttribute('aria-hidden', 'false');
+    startWinnersAutoPlay();
+  });
+
+  const closeCarousel = () => {
+    if (document.activeElement === closeBtn) closeBtn.blur();
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
+    stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer);
+    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
+  };
+
+  closeBtn.addEventListener('click', closeCarousel);
+
+  const onHumanTouchStart = () => {
+    stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer);
+  };
+
+  const onHumanTouchEnd = () => {
+    clearTimeout(winnersResumeTimer);
+    winnersResumeTimer = setTimeout(() => {
+      startWinnersAutoPlay();
+    }, 6000);
+  };
+
+  track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
+  track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
+  track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
+  track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
+  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
+}
+
+function startWinnersAutoPlay() {
+  const track = document.getElementById('winnersTrack');
+  if (!track || winnersImages.length <= 1) return;
+  
+  stopWinnersAutoPlay(); 
+  
+  winnersAutoPlayTimer = setInterval(() => {
+    const slideWidth = track.clientWidth;
+    const currentScroll = track.scrollLeft;
+    const maxScroll = track.scrollWidth - slideWidth;
+    
+    if (currentScroll >= maxScroll - 10) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+    }
+  }, 3000);
+}
+
+function stopWinnersAutoPlay() {
+  if (winnersAutoPlayTimer) {
+    clearInterval(winnersAutoPlayTimer);
+    winnersAutoPlayTimer = null;
+  }
+}
+</script>
   </script>
 </body>
 </html>
