@@ -2471,13 +2471,30 @@ header{
 .winner-slide {
   flex: 0 0 100%; height: 80vh; scroll-snap-align: center;
   display: flex; align-items: center; justify-content: center;
+  perspective: 1000px; /* Le da profundidad 3D */
 }
+
 .winner-slide img {
   max-width: 90%; max-height: 100%; object-fit: contain;
   border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.1);
+  
+  /* MAGIA PREMIUM: Efecto de desenfoque y escala por defecto */
+  transform: scale(0.85);
+  opacity: 0.3;
+  filter: blur(8px);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.8s ease,
+              filter 0.8s ease;
+  will-change: transform, opacity, filter;
 }
 
+/* Cuando la imagen entra al centro de la pantalla */
+.winner-slide.active img {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0px);
+}
 </style>
 
 </head>
@@ -3519,19 +3536,34 @@ function buildWinnersCarousel() {
   const bubble = document.getElementById('winnersBubble');
   const lightbox = document.getElementById('winnersLightbox');
   const closeBtn = document.getElementById('winnersClose');
-  
   if (!track || !bubble || !lightbox) return;
 
   track.innerHTML = '';
-  winnersImages.forEach(url => {
+  
+  // Crear slides
+  winnersImages.forEach((url, index) => {
     const slide = document.createElement('div');
     slide.className = 'winner-slide';
+    if (index === 0) slide.classList.add('active'); // La primera activa por defecto
     slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
     track.appendChild(slide);
   });
 
-  // Forzamos la suavidad nativa del sistema operativo para evitar saltos bruscos
-  track.style.scrollBehavior = 'smooth';
+  // OBSERVER: Detecta de forma inteligente qué imagen está en el centro
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      } else {
+        entry.target.classList.remove('active');
+      }
+    });
+  }, {
+    root: track,
+    threshold: 0.55 // Se activa cuando más de la mitad de la foto está visible
+  });
+
+  document.querySelectorAll('.winner-slide').forEach(slide => observer.observe(slide));
 
   bubble.addEventListener('click', () => {
     lightbox.classList.add('show');
@@ -3544,54 +3576,45 @@ function buildWinnersCarousel() {
     lightbox.classList.remove('show');
     lightbox.setAttribute('aria-hidden', 'true');
     stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer); // Apagamos el reinicio si cierra el carrusel
+    clearTimeout(winnersResumeTimer);
     setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
   };
 
   closeBtn.addEventListener('click', closeCarousel);
 
-  // === DETECCIÓN INTELIGENTE DE TOQUE HUMANO ===
-  
-  // 1. Cuando el usuario pone el dedo (o hace clic)
+  // Eventos para detectar toque humano y no interrumpir
   const onHumanTouchStart = () => {
-    stopWinnersAutoPlay(); // Frena la animación de inmediato
-    clearTimeout(winnersResumeTimer); // Cancela cualquier reinicio pendiente
+    stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer);
   };
-
-  // 2. Cuando el usuario quita el dedo (suelta la pantalla)
   const onHumanTouchEnd = () => {
     clearTimeout(winnersResumeTimer);
-    // Programa el arranque automático exactamente 6 segundos (6000ms) después
     winnersResumeTimer = setTimeout(() => {
       startWinnersAutoPlay();
     }, 6000);
   };
 
-  // Eventos de entrada (poner el dedo)
   track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
   track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
-
-  // Eventos de salida (quitar el dedo)
   track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
   track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
-  track.addEventListener('wheel', onHumanTouchEnd, { passive: true }); // Por si desliza en PC
+  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
 }
 
 function startWinnersAutoPlay() {
   const track = document.getElementById('winnersTrack');
   if (!track || winnersImages.length <= 1) return;
-  
-  stopWinnersAutoPlay(); // Asegura que no se dupliquen velocidades
-  
-  // Se mueve cada 3 segundos (3000ms)
+  stopWinnersAutoPlay(); 
+
   winnersAutoPlayTimer = setInterval(() => {
     const slideWidth = track.clientWidth;
     const currentScroll = track.scrollLeft;
     const maxScroll = track.scrollWidth - slideWidth;
     
-    // Si llegó a la última foto, vuelve a la primera
+    // Si llegó a la última foto
     if (currentScroll >= maxScroll - 10) {
-      track.scrollTo({ left: 0, behavior: 'smooth' });
+      // Regresa a la primera INSTANTÁNEAMENTE para evitar el "rebobinado" brusco
+      track.scrollTo({ left: 0, behavior: 'auto' });
     } else {
       // Avanza a la siguiente foto de manera natural
       track.scrollBy({ left: slideWidth, behavior: 'smooth' });
