@@ -2392,64 +2392,48 @@ header{
    🔥 BURBUJA DE GANADORES Y CARRUSEL PREMIUM
    ========================================================= */
 /* Ajuste de la barra superior para separar el logo de la burbuja */
+/* =========================================================
+   🏆 BOTÓN GANADORES PREMIUM Y CARRUSEL
+   ========================================================= */
 .branch-topbar {
   justify-content: space-between !important;
   max-width: 100% !important;
-  padding: 0 10px;
-}
-.branch-brand { justify-content: flex-start !important; }
-
-/* La Burbuja tipo "Historia" */
-.winners-bubble-wrap {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  animation: floatBubble 4s ease-in-out infinite alternate;
-  display: none; /* Se muestra por JS si hay imágenes */
-}
-.winners-bubble-wrap.show { display: flex; }
-
-.winners-bubble {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  padding: 3px;
-  background: conic-gradient(from 0deg, #FFC400, #FF2E2E, #0B5CFF, #00D46A, #FFC400);
-  animation: spinGradient 4s linear infinite;
-  box-shadow: 0 10px 25px rgba(255, 196, 0, 0.4);
-  position: relative;
-}
-.winners-bubble-inner {
+  padding: 0 5px;
   width: 100%;
-  height: 100%;
-  background: var(--bg-solid);
-  border-radius: 50%;
-  border: 2px solid #fff;
-  display: flex;
+}
+
+/* Píldora Elegante (Glassmorphism) */
+.winners-premium-btn {
+  display: none; /* Se muestra por JS */
   align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  overflow: hidden;
-}
-.winners-bubble-inner img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.winners-text {
-  font-size: 10px;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255, 215, 0, 0.4); /* Borde dorado sutil */
+  border-radius: 999px;
+  padding: 4px 14px 4px 4px;
+  color: #FFD700;
   font-weight: 900;
-  text-transform: uppercase;
-  color: #FFC400;
+  font-size: 11px;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
+}
+.winners-premium-btn.show { display: inline-flex; animation: popInBtn 0.5s ease; }
+.winners-premium-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.2); }
+
+.winners-premium-btn img {
+  width: 32px; height: 32px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid #FFD700;
 }
 
-@keyframes spinGradient { to { transform: rotate(360deg); } }
-@keyframes floatBubble { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@keyframes popInBtn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
-/* Carrusel Fullscreen (Lightbox) */
+/* Carrusel Fullscreen */
 .winners-lightbox {
   position: fixed; inset: 0; z-index: 1000000;
   background: rgba(4, 10, 24, 0.95);
@@ -2465,7 +2449,7 @@ header{
 }
 .winners-title {
   color: #fff; font-size: 18px; font-weight: 900;
-  background: linear-gradient(90deg, #FFC400, #FF2E2E);
+  background: linear-gradient(90deg, #FFD700, #FFF8DC);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .winners-close {
@@ -2476,7 +2460,6 @@ header{
 }
 .winners-close:active { transform: scale(0.9); }
 
-/* Track de desplazamiento nativo ultra fluido */
 .winners-track {
   display: flex; flex: 1; overflow-x: auto;
   scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
@@ -2488,7 +2471,6 @@ header{
 .winner-slide {
   flex: 0 0 100%; height: 80vh; scroll-snap-align: center;
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.3s ease;
 }
 .winner-slide img {
   max-width: 90%; max-height: 100%; object-fit: contain;
@@ -2552,15 +2534,13 @@ header{
           <div class="mini-logo"><img id="branchMainLogo" src="" alt="Logo de la empresa" referrerpolicy="no-referrer"></div>
           <h2 id="branchMainTitle" class="branch-main-title">Rifas</h2>
         </div>
-        <div id="winnersBubble" class="winners-bubble-wrap" role="button" aria-label="Ver últimos ganadores">
-          <div class="winners-bubble">
-            <div class="winners-bubble-inner">
-              <img id="winnersBubbleImg" src="" alt="Ganadores">
-            </div>
-          </div>
-          <span class="winners-text">Ganadores</span>
-        </div>
+        
+        <button id="winnersBubble" class="winners-premium-btn" aria-label="Ver últimos ganadores">
+          <img id="winnersBubbleImg" src="" alt="Ganadores">
+          <span>Ganadores</span>
+        </button>
       </div>
+      <div id="branchGrid" class="branch-grid"></div>
 
 <div id="branchScrollIndicator" class="branch-scroll-indicator premium-ghost" aria-hidden="true">
   <div class="ghost-hand-container">
@@ -3504,34 +3484,32 @@ async function loadLogoFast(){
     /* =========================================================
    🔥 LÓGICA DE ÚLTIMOS GANADORES
    ========================================================= */
+/* =========================================================
+   🏆 LÓGICA DE ÚLTIMOS GANADORES (Corregida)
+   ========================================================= */
 let winnersImages = [];
 let winnersAutoPlayTimer = null;
 
 async function loadWinnersFast() {
   try {
-    // Rango AE2:AI2 en la hoja Configuracion
     const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
     const rows = parseCSV(txt);
-    
-    // Extraer la fila de datos (puede ser el index 0 o 1 dependiendo de los headers de Sheets)
     const dataRow = rows.length > 1 ? rows[1] : rows[0];
     if (!dataRow) return;
 
-    // Filtrar celdas vacías y guardar las URLs válidas
     winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
 
     if (winnersImages.length > 0) {
-      // Activar la burbuja
       const bubble = document.getElementById('winnersBubble');
       const bubbleImg = document.getElementById('winnersBubbleImg');
       if (bubble && bubbleImg) {
-        bubbleImg.src = winnersImages[0]; // Mostrar la primera imagen en la burbuja
+        bubbleImg.src = winnersImages[0];
         bubble.classList.add('show');
       }
       buildWinnersCarousel();
     }
   } catch (error) {
-    console.log('No se pudieron cargar los ganadores', error);
+    console.log('Sin ganadores configurados');
   }
 }
 
@@ -3543,7 +3521,6 @@ function buildWinnersCarousel() {
   
   if (!track || !bubble || !lightbox) return;
 
-  // Limpiar y construir slides
   track.innerHTML = '';
   winnersImages.forEach(url => {
     const slide = document.createElement('div');
@@ -3552,24 +3529,23 @@ function buildWinnersCarousel() {
     track.appendChild(slide);
   });
 
-  // Abrir Lightbox
   bubble.addEventListener('click', () => {
     lightbox.classList.add('show');
     lightbox.setAttribute('aria-hidden', 'false');
     startWinnersAutoPlay();
   });
 
-  // Cerrar Lightbox
   const closeCarousel = () => {
+    // 🔥 SOLUCIÓN AL ERROR DE CONSOLA: Quita el foco del botón "X"
+    if (document.activeElement === closeBtn) closeBtn.blur();
+    
     lightbox.classList.remove('show');
     lightbox.setAttribute('aria-hidden', 'true');
     stopWinnersAutoPlay();
-    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300); // Reset al cerrar
+    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
   };
 
   closeBtn.addEventListener('click', closeCarousel);
-  
-  // Pausar auto-play si el usuario interactúa (toca o arrastra)
   track.addEventListener('touchstart', stopWinnersAutoPlay, { passive: true });
   track.addEventListener('mousedown', stopWinnersAutoPlay, { passive: true });
 }
@@ -3578,20 +3554,19 @@ function startWinnersAutoPlay() {
   const track = document.getElementById('winnersTrack');
   if (!track || winnersImages.length <= 1) return;
   
-  stopWinnersAutoPlay(); // Limpiar timers anteriores
+  stopWinnersAutoPlay();
   
   winnersAutoPlayTimer = setInterval(() => {
     const slideWidth = track.clientWidth;
     const currentScroll = track.scrollLeft;
     const maxScroll = track.scrollWidth - slideWidth;
     
-    // Si llegó al final, vuelve al inicio, sino avanza un slide
     if (currentScroll >= maxScroll - 10) {
       track.scrollTo({ left: 0, behavior: 'smooth' });
     } else {
       track.scrollBy({ left: slideWidth, behavior: 'smooth' });
     }
-  }, 3500); // Cambia de imagen cada 3.5 segundos
+  }, 3500);
 }
 
 function stopWinnersAutoPlay() {
