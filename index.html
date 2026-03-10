@@ -3489,6 +3489,7 @@ async function loadLogoFast(){
    ========================================================= */
 let winnersImages = [];
 let winnersAutoPlayTimer = null;
+let currentGlideFrame = null;
 
 async function loadWinnersFast() {
   try {
@@ -3554,7 +3555,7 @@ function startWinnersAutoPlay() {
   const track = document.getElementById('winnersTrack');
   if (!track || winnersImages.length <= 1) return;
   
-  stopWinnersAutoPlay();
+  stopWinnersAutoPlay(); // Limpia todo antes de arrancar
   
   winnersAutoPlayTimer = setInterval(() => {
     const slideWidth = track.clientWidth;
@@ -3563,18 +3564,15 @@ function startWinnersAutoPlay() {
     
     let targetScroll = currentScroll + slideWidth;
     
-    // Si llegó a la última foto, regresa suavemente al inicio
     if (currentScroll >= maxScroll - 10) {
       targetScroll = 0; 
     }
     
-    // --- MOTOR DE DESPLAZAMIENTO ULTRA SUAVE ---
     const startScroll = track.scrollLeft;
     const distance = targetScroll - startScroll;
-    const duration = 1200; // 1.2 segundos de deslizamiento elegante
+    const duration = 1200; 
     let startTime = null;
 
-    // Desactivamos el "imán" nativo un segundo para que no pelee con nuestra animación
     track.style.scrollSnapType = 'none';
 
     function smoothGlide(currentTime) {
@@ -3582,7 +3580,6 @@ function startWinnersAutoPlay() {
       const timeElapsed = currentTime - startTime;
       const progress = Math.min(timeElapsed / duration, 1);
       
-      // Curva matemática para que arranque lento, acelere en el medio y frene suave (easeInOutCubic)
       const ease = progress < 0.5 
         ? 4 * progress * progress * progress 
         : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -3590,22 +3587,34 @@ function startWinnersAutoPlay() {
       track.scrollLeft = startScroll + (distance * ease);
 
       if (timeElapsed < duration) {
-        requestAnimationFrame(smoothGlide);
+        // Guardamos el ID de la animación para poder matarla si el humano toca la pantalla
+        currentGlideFrame = requestAnimationFrame(smoothGlide);
       } else {
-        // Al terminar, reactivamos el imán para que el usuario pueda usar su dedo
         track.style.scrollSnapType = 'x mandatory';
+        currentGlideFrame = null; 
       }
     }
     
-    requestAnimationFrame(smoothGlide);
+    currentGlideFrame = requestAnimationFrame(smoothGlide);
 
-  }, 4500); // Espera 4.5 segundos en cada foto para que puedan apreciarla
+  }, 4500); 
 }
 
 function stopWinnersAutoPlay() {
+  // 1. Apagamos el temporizador (para que no intente pasar a la siguiente foto)
   if (winnersAutoPlayTimer) {
     clearInterval(winnersAutoPlayTimer);
     winnersAutoPlayTimer = null;
+  }
+  
+  // 2. FRENO DE MANO: Matamos la animación exacta en curso si el usuario toca la pantalla
+  if (currentGlideFrame) {
+    cancelAnimationFrame(currentGlideFrame);
+    currentGlideFrame = null;
+    
+    // Devolvemos el imán nativo inmediatamente para que el dedo del usuario tome el control fluido
+    const track = document.getElementById('winnersTrack');
+    if (track) track.style.scrollSnapType = 'x mandatory';
   }
 }
 
