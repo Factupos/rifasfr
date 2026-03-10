@@ -2403,35 +2403,99 @@ header{
 }
 
 /* Píldora Elegante (Glassmorphism) */
+/* =========================================================
+   🏆 BOTÓN GANADORES: NEÓN PÚRPURA PREMIUM
+   ========================================================= */
 .winners-premium-btn {
   display: none; /* Se muestra por JS */
+  position: relative;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-  border: 1px solid rgba(255, 215, 0, 0.4); /* Borde dorado sutil */
+  justify-content: center;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #160029 0%, #3d007a 100%);
+  border: 1px solid rgba(191, 64, 255, 0.5);
   border-radius: 999px;
-  padding: 4px 14px 4px 4px;
-  color: #FFD700;
+  color: #ffffff;
   font-weight: 900;
-  font-size: 11px;
-  letter-spacing: 0.5px;
+  font-size: 12px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(191, 64, 255, 0.8);
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
+  overflow: hidden; /* Necesario para que el reflejo no se salga */
+  z-index: 10;
+  
+  /* Sombra base */
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.5), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    
+  /* Animaciones: Entrada + Pulso Neón Constante */
+  animation: popInBtn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             neonPulsePurple 2s infinite alternate;
 }
-.winners-premium-btn.show { display: inline-flex; animation: popInBtn 0.5s ease; }
-.winners-premium-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.2); }
 
+/* Ocultamos la imagen en miniatura sin borrarla del HTML para que no falle el JS */
 .winners-premium-btn img {
-  width: 32px; height: 32px;
-  border-radius: 50%; object-fit: cover;
-  border: 2px solid #FFD700;
+  display: none !important; 
 }
 
-@keyframes popInBtn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+/* Agregamos un destello decorativo al texto */
+.winners-premium-btn span::before {
+  content: "✨ ";
+  filter: drop-shadow(0 0 5px #fff);
+}
+
+/* Efecto de toque (Click) */
+.winners-premium-btn:active { 
+  transform: scale(0.92); 
+  filter: brightness(1.2);
+}
+
+/* MAGIA 1: El reflejo de luz (Shine) que pasa por encima del botón */
+.winners-premium-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  animation: premiumShineSweep 3.5s infinite;
+}
+
+/* MAGIA 2: El latido y resplandor neón */
+@keyframes neonPulsePurple {
+  0% {
+    box-shadow: 
+      0 0 10px rgba(138, 43, 226, 0.4), 
+      0 0 20px rgba(138, 43, 226, 0.2), 
+      inset 0 0 10px rgba(191, 64, 255, 0.3);
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(191, 64, 255, 0.8), 
+      0 0 40px rgba(191, 64, 255, 0.5), 
+      0 0 60px rgba(138, 43, 226, 0.3), 
+      inset 0 0 15px rgba(255, 120, 255, 0.6);
+    transform: scale(1.03) translateY(-2px);
+  }
+}
+
+/* Animación del reflejo de luz */
+@keyframes premiumShineSweep {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; } /* Pausa antes de repetir */
+}
+
+/* Entrada inicial suave y con rebote */
+@keyframes popInBtn { 
+  from { opacity: 0; transform: scale(0.5) translateY(-10px); } 
+  to { opacity: 1; transform: scale(1) translateY(0); } 
+}
 
 /* Carrusel Fullscreen */
 .winners-lightbox {
