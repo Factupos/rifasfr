@@ -3561,12 +3561,45 @@ function startWinnersAutoPlay() {
     const currentScroll = track.scrollLeft;
     const maxScroll = track.scrollWidth - slideWidth;
     
+    let targetScroll = currentScroll + slideWidth;
+    
+    // Si llegó a la última foto, regresa suavemente al inicio
     if (currentScroll >= maxScroll - 10) {
-      track.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+      targetScroll = 0; 
     }
-  }, 3500);
+    
+    // --- MOTOR DE DESPLAZAMIENTO ULTRA SUAVE ---
+    const startScroll = track.scrollLeft;
+    const distance = targetScroll - startScroll;
+    const duration = 1200; // 1.2 segundos de deslizamiento elegante
+    let startTime = null;
+
+    // Desactivamos el "imán" nativo un segundo para que no pelee con nuestra animación
+    track.style.scrollSnapType = 'none';
+
+    function smoothGlide(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Curva matemática para que arranque lento, acelere en el medio y frene suave (easeInOutCubic)
+      const ease = progress < 0.5 
+        ? 4 * progress * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+      track.scrollLeft = startScroll + (distance * ease);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(smoothGlide);
+      } else {
+        // Al terminar, reactivamos el imán para que el usuario pueda usar su dedo
+        track.style.scrollSnapType = 'x mandatory';
+      }
+    }
+    
+    requestAnimationFrame(smoothGlide);
+
+  }, 4500); // Espera 4.5 segundos en cada foto para que puedan apreciarla
 }
 
 function stopWinnersAutoPlay() {
