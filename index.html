@@ -2389,179 +2389,93 @@ header{
 }
 
     /* =========================================================
-   🏆 MINI CARRUSEL FLOTANTE (Modo Bestia)
+   🔥 BURBUJA DE GANADORES Y CARRUSEL PREMIUM
    ========================================================= */
-.mini-winners-module {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  height: 60px;
-  background: rgba(4, 10, 24, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 196, 0, 0.4); /* Borde dorado pro */
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.7), 0 0 20px rgba(255, 196, 0, 0.2);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
-  z-index: 10; /* Sobre la imagen de la sucursal */
+/* Ajuste de la barra superior para separar el logo de la burbuja */
+/* =========================================================
+   🏆 BOTÓN GANADORES PREMIUM Y CARRUSEL
+   ========================================================= */
+.branch-topbar {
+  justify-content: space-between !important;
+  max-width: 100% !important;
+  padding: 0 5px;
+  width: 100%;
 }
 
-.mini-winners-module:active {
-  transform: scale(0.95);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.8), 0 0 10px rgba(255, 196, 0, 0.4);
-}
-
-.mini-winners-badge {
-  background: linear-gradient(90deg, #FFC400, #FF7B00);
-  color: #000;
-  font-size: 10px;
-  font-weight: 1000;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 3px 0;
-  letter-spacing: 1.5px;
-  box-shadow: 0 2px 10px rgba(255, 196, 0, 0.4);
-}
-
-.mini-winners-track {
-  display: flex;
-  flex: 1;
+/* Píldora Elegante (Glassmorphism) */
+.winners-premium-btn {
+  display: none; /* Se muestra por JS */
   align-items: center;
   gap: 8px;
-  padding: 0 8px;
-  width: max-content;
-  /* Animación agresiva pero fluida */
-  animation: scrollWinners 12s linear infinite;
-}
-
-.mini-winners-track img {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #FFC400;
-  box-shadow: 0 0 10px rgba(255, 196, 0, 0.5);
-  flex-shrink: 0;
-}
-
-@keyframes scrollWinners {
-  0% { transform: translateX(0); }
-  /* Se desplaza el 50% porque duplicamos las imágenes en JS */
-  100% { transform: translateX(-50%); } 
-}
-
-/* =========================================================
-   🎬 MODAL AMPLIADO (Galería de Ganadores)
-   ========================================================= */
-.super-winners-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.super-winners-modal.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.sw-modal-content {
-  position: relative;
-  width: min(92vw, 450px);
-  background: linear-gradient(180deg, #111a2e, #070e1a);
-  border: 1px solid rgba(255, 196, 0, 0.3);
-  border-radius: 28px;
-  padding: 24px 16px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 2px 0 rgba(255,255,255,0.1);
-  transform: translateY(20px) scale(0.95);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.super-winners-modal.show .sw-modal-content {
-  transform: translateY(0) scale(1);
-}
-
-.sw-close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 46, 46, 0.15);
-  color: #FF2E2E;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255, 215, 0, 0.4); /* Borde dorado sutil */
+  border-radius: 999px;
+  padding: 4px 14px 4px 4px;
+  color: #FFD700;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
+}
+.winners-premium-btn.show { display: inline-flex; animation: popInBtn 0.5s ease; }
+.winners-premium-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.2); }
+
+.winners-premium-btn img {
+  width: 32px; height: 32px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid #FFD700;
 }
 
-.sw-close-btn:active {
-  background: #FF2E2E;
-  color: #fff;
-  transform: scale(0.9);
-}
+@keyframes popInBtn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
-.sw-title {
-  color: #FFC400;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 1000;
-  margin: 0 0 4px 0;
-  text-shadow: 0 0 15px rgba(255, 196, 0, 0.3);
+/* Carrusel Fullscreen */
+.winners-lightbox {
+  position: fixed; inset: 0; z-index: 1000000;
+  background: rgba(4, 10, 24, 0.95);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  display: none; flex-direction: column;
+  opacity: 0; transition: opacity 0.3s ease;
 }
+.winners-lightbox.show { display: flex; opacity: 1; }
 
-.sw-subtitle {
-  color: rgba(255,255,255,0.6);
-  text-align: center;
-  font-size: 13px;
-  margin: 0 0 20px 0;
+.winners-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 20px 0; flex-shrink: 0;
 }
-
-/* Carrusel horizontal tipo tarjeta de iOS */
-.sw-gallery {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 12px;
-  scrollbar-width: none; /* Firefox */
+.winners-title {
+  color: #fff; font-size: 18px; font-weight: 900;
+  background: linear-gradient(90deg, #FFD700, #FFF8DC);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-
-.sw-gallery::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+.winners-close {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  width: 40px; height: 40px; border-radius: 50%; color: #fff;
+  font-size: 24px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; backdrop-filter: blur(10px);
 }
+.winners-close:active { transform: scale(0.9); }
 
-.sw-slide {
-  flex: 0 0 85%;
-  scroll-snap-align: center;
-  border-radius: 20px;
-  overflow: hidden;
+.winners-track {
+  display: flex; flex: 1; overflow-x: auto;
+  scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  align-items: center; padding: 0 10px; gap: 10px;
+}
+.winners-track::-webkit-scrollbar { display: none; }
+
+.winner-slide {
+  flex: 0 0 100%; height: 80vh; scroll-snap-align: center;
+  display: flex; align-items: center; justify-content: center;
+}
+.winner-slide img {
+  max-width: 90%; max-height: 100%; object-fit: contain;
+  border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-  aspect-ratio: 4/5; /* Formato vertical perfecto para retratos */
-}
-
-.sw-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
 }
 
 </style>
@@ -2615,15 +2529,18 @@ header{
 
  <div id="branchShell" class="branch-shell" aria-live="polite">
     <div class="branch-inner">
-      <div class="branch-topbar">
+    <div class="branch-topbar">
         <div class="branch-brand">
           <div class="mini-logo"><img id="branchMainLogo" src="" alt="Logo de la empresa" referrerpolicy="no-referrer"></div>
           <h2 id="branchMainTitle" class="branch-main-title">Rifas</h2>
         </div>
+        
+        <button id="winnersBubble" class="winners-premium-btn" aria-label="Ver últimos ganadores">
+          <img id="winnersBubbleImg" src="" alt="Ganadores">
+          <span>Ganadores</span>
+        </button>
       </div>
       <div id="branchGrid" class="branch-grid"></div>
-    </div>
-  </div>
 
 <div id="branchScrollIndicator" class="branch-scroll-indicator premium-ghost" aria-hidden="true">
   <div class="ghost-hand-container">
@@ -2723,7 +2640,13 @@ header{
   <!-- Mensajes -->
   <div id="message" class="message">Boleta ocupada</div>
   <div id="loadingMessage" class="loading-message">Buscando número aleatorio...</div>
-
+<div id="winnersLightbox" class="winners-lightbox" aria-hidden="true">
+    <div class="winners-header">
+      <div class="winners-title">✨ ÚLTIMOS GANADORES</div>
+      <button id="winnersClose" class="winners-close">&times;</button>
+    </div>
+    <div id="winnersTrack" class="winners-track"></div>
+  </div>
   <script>
 /* =========================================================
    ✅ CONFIG (VISIBLES AL INICIO — como pediste)
@@ -2739,7 +2662,7 @@ const GID_CONFIG  = '1842804307';    // Config_Publica
 const GID_NOTIFICATIONS = '1029797655'; // Notificaciones (logo)
 const PROXY = 'https://csv-proxy.jeisendigital.workers.dev/?u=';
 const SUCURSALES_SHEET_NAME = 'Sucursales';
-const SUCURSALES_RANGE = 'A:J';
+const SUCURSALES_RANGE = 'A:E';
 
 /* =========================================================
    ✅ LECTURAS ESPECIALES
@@ -3120,16 +3043,11 @@ async function fetchBranches(){
       if(!name && !detail && !image && !rawSheetId) continue;
 
       const branchIndex = out.length;
+      
+      // ✅ ELIMINADA LA EXCEPCIÓN: Ahora siempre toma el ID de la columna C
       const sheetId = sanitizeSheetId(rawSheetId);
-      if(!name || !sheetId) continue;
 
-      // 👇 NUEVO: Capturar ganadores (Columnas F a J = índices 5 al 9)
-      const winners = [];
-      for (let w = 5; w <= 9; w++) {
-        if (row[w] && String(row[w]).trim() !== '') {
-          winners.push(String(row[w]).trim());
-        }
-      }
+      if(!name || !sheetId) continue;
 
       out.push({
         index: branchIndex,
@@ -3138,9 +3056,8 @@ async function fetchBranches(){
         detail,
         image,
         sheetId,
-        winners, // Añadimos el array de ganadores
         enabled: true,
-        isBase: false
+        isBase: false // ✅ Ninguna sucursal es "Base" por defecto ahora
       });
     }
 
@@ -3232,28 +3149,12 @@ function renderBranchSelector(branches){
     // Tarjetas súper compactas y eficientes (Solo detalle + imagen maximizada)
     grid.innerHTML = BRANCHES.map((branch, idx)=>{
       const visual = getBranchVisual(branch);
-      
-      // 👇 NUEVO: Generar el HTML del mini carrusel si hay ganadores
-      let winnersDOM = '';
-      if (branch.winners && branch.winners.length > 0) {
-        // Duplicamos las imágenes para lograr el efecto de scroll infinito sin cortes
-        const imgsHtml = branch.winners.map(w => `<img src="${escapeHtml(w)}" alt="Ganador" loading="lazy">`).join('');
-        winnersDOM = `
-          <div class="mini-winners-module" onclick="openWinnersModal(event, ${idx})">
-            <div class="mini-winners-badge">🏆 ÚLTIMOS GANADORES</div>
-            <div class="mini-winners-track">
-              ${imgsHtml}${imgsHtml}
-            </div>
-          </div>
-        `;
-      }
-
       return `
         <button class="branch-card${BRANCHES.length===1?' single':''}" type="button" data-branch-index="${idx}" aria-label="Abrir sucursal">
           <p class="branch-card-detail">${escapeHtml(branch.detail || 'Toca para acceder')}</p>
           <div class="branch-thumb">
             ${visual ? `<img src="${escapeHtml(visual)}" alt="Sucursal" referrerpolicy="no-referrer">` : `<div class="branch-thumb-fallback">🎟️</div>`}
-            ${winnersDOM} </div>
+          </div>
         </button>`;
     }).join('');
     
@@ -3577,6 +3478,128 @@ async function loadLogoFast(){
       return;
     }
   }catch(_){}
+}
+
+
+    /* =========================================================
+   🔥 LÓGICA DE ÚLTIMOS GANADORES
+   ========================================================= */
+/* =========================================================
+   🏆 LÓGICA DE ÚLTIMOS GANADORES (Corregida)
+   ========================================================= */
+let winnersImages = [];
+let winnersAutoPlayTimer = null;
+
+async function loadWinnersFast() {
+  try {
+    const txt = await fetchCsvBySheetRange('Configuracion', 'AE2:AI2', 5000);
+    const rows = parseCSV(txt);
+    const dataRow = rows.length > 1 ? rows[1] : rows[0];
+    if (!dataRow) return;
+
+    winnersImages = dataRow.map(cell => String(cell).trim()).filter(url => url.startsWith('http'));
+
+    if (winnersImages.length > 0) {
+      const bubble = document.getElementById('winnersBubble');
+      const bubbleImg = document.getElementById('winnersBubbleImg');
+      if (bubble && bubbleImg) {
+        bubbleImg.src = winnersImages[0];
+        bubble.classList.add('show');
+      }
+      buildWinnersCarousel();
+    }
+  } catch (error) {
+    console.log('Sin ganadores configurados');
+  }
+}
+
+function buildWinnersCarousel() {
+  const track = document.getElementById('winnersTrack');
+  const bubble = document.getElementById('winnersBubble');
+  const lightbox = document.getElementById('winnersLightbox');
+  const closeBtn = document.getElementById('winnersClose');
+  
+  if (!track || !bubble || !lightbox) return;
+
+  track.innerHTML = '';
+  winnersImages.forEach(url => {
+    const slide = document.createElement('div');
+    slide.className = 'winner-slide';
+    slide.innerHTML = `<img src="${url}" alt="Ganador" loading="lazy">`;
+    track.appendChild(slide);
+  });
+
+  bubble.addEventListener('click', () => {
+    lightbox.classList.add('show');
+    lightbox.setAttribute('aria-hidden', 'false');
+    startWinnersAutoPlay();
+  });
+
+  const closeCarousel = () => {
+    // 🔥 SOLUCIÓN AL ERROR DE CONSOLA: Quita el foco del botón "X"
+    if (document.activeElement === closeBtn) closeBtn.blur();
+    
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
+    stopWinnersAutoPlay();
+    setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
+  };
+
+  closeBtn.addEventListener('click', closeCarousel);
+  track.addEventListener('touchstart', stopWinnersAutoPlay, { passive: true });
+  track.addEventListener('mousedown', stopWinnersAutoPlay, { passive: true });
+}
+
+function startWinnersAutoPlay() {
+  const track = document.getElementById('winnersTrack');
+  if (!track || winnersImages.length <= 1) return;
+  
+  stopWinnersAutoPlay();
+  
+  winnersAutoPlayTimer = setInterval(() => {
+    const slideWidth = track.clientWidth;
+    const currentScroll = track.scrollLeft;
+    const maxScroll = track.scrollWidth - slideWidth;
+    
+    let targetScroll = currentScroll + slideWidth;
+    
+    // Si llegó a la última foto, regresa suavemente al inicio
+    if (currentScroll >= maxScroll - 10) {
+      targetScroll = 0; 
+    }
+    
+    // --- MOTOR DE DESPLAZAMIENTO ULTRA SUAVE ---
+    const startScroll = track.scrollLeft;
+    const distance = targetScroll - startScroll;
+    const duration = 1200; // 1.2 segundos de deslizamiento elegante
+    let startTime = null;
+
+    // Desactivamos el "imán" nativo un segundo para que no pelee con nuestra animación
+    track.style.scrollSnapType = 'none';
+
+    function smoothGlide(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Curva matemática para que arranque lento, acelere en el medio y frene suave (easeInOutCubic)
+      const ease = progress < 0.5 
+        ? 4 * progress * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+      track.scrollLeft = startScroll + (distance * ease);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(smoothGlide);
+      } else {
+        // Al terminar, reactivamos el imán para que el usuario pueda usar su dedo
+        track.style.scrollSnapType = 'x mandatory';
+      }
+    }
+    
+    requestAnimationFrame(smoothGlide);
+
+  }, 4500); // Espera 4.5 segundos en cada foto para que puedan apreciarla
 }
 
 /* =========================
@@ -4147,10 +4170,11 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   window.addEventListener('resize', ()=>requestAnimationFrame(applyViewportOffset), { passive:true });
 
   // Carga base (config + logo) en paralelo para que boot se vea pro y rápido
-  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección y logo');
+ bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección, logo y ganadores');
   await Promise.allSettled([
     loadConfigFast(),
-    loadLogoFast()
+    loadLogoFast(),   // <--- ¡AQUÍ ESTÁ LA COMA QUE FALTABA!
+    loadWinnersFast() // <-- LA NUEVA MAGIA AQUÍ
   ]);
 
   // Título boot con el nombre (si ya está disponible)
@@ -4318,49 +4342,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     if(nowKey!==DAY_MARK){ DAY_MARK=nowKey; await syncMapFast(); DAILY=[]; pickDaily(true); renderGrid(); return; }
     const before=DAILY.length; await syncMapFast(); if(DAILY.length!==before){ renderGrid(); }
   }, 20000);
-
-  function openWinnersModal(e, branchIdx) {
-  // ¡Crucial! Evita que el clic abra la sucursal
-  e.preventDefault();
-  e.stopPropagation();
-
-  const branch = BRANCHES[branchIdx];
-  if (!branch || !branch.winners || !branch.winners.length) return;
-
-  // Si el modal no existe en el HTML, lo creamos dinámicamente
-  let modal = document.getElementById('superWinnersModal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'superWinnersModal';
-    modal.className = 'super-winners-modal';
-    modal.innerHTML = `
-      <div class="sw-modal-content" onclick="event.stopPropagation()">
-        <button class="sw-close-btn" onclick="closeWinnersModal()">&times;</button>
-        <h3 class="sw-title">🏆 GALERÍA DE GANADORES</h3>
-        <p class="sw-subtitle">Desliza para verlos todos</p>
-        <div class="sw-gallery" id="swGalleryTrack"></div>
-      </div>
-    `;
-    modal.onclick = closeWinnersModal;
-    document.body.appendChild(modal);
-  }
-
-  // Llenar el carrusel grande
-  const track = document.getElementById('swGalleryTrack');
-  track.innerHTML = branch.winners.map(w => `
-    <div class="sw-slide">
-      <img src="${escapeHtml(w)}" alt="Ganador de la rifa">
-    </div>
-  `).join('');
-
-  // Mostrar con animación
-  requestAnimationFrame(() => modal.classList.add('show'));
-}
-
-function closeWinnersModal() {
-  const modal = document.getElementById('superWinnersModal');
-  if (modal) modal.classList.remove('show');
-}
 });
   </script>
 </body>
