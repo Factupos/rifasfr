@@ -2406,100 +2406,88 @@ header{
 /* =========================================================
    🏆 BOTÓN GANADORES: NEÓN PÚRPURA PREMIUM
    ========================================================= */
+/* =========================================================
+   🏆 BOTÓN GANADORES: PREMIUM & ULTRA RÁPIDO (GPU Optimized)
+   ========================================================= */
 .winners-premium-btn {
-  display: none; /* Se muestra por JS */
+  display: none; /* Se mostrará con la clase .show */
   position: relative;
   align-items: center;
   justify-content: center;
   padding: 10px 24px;
-  background: linear-gradient(135deg, #160029 0%, #3d007a 100%);
-  border: 1px solid rgba(191, 64, 255, 0.5);
+  /* Gradiente elegante que combina con tu botón aleatorio */
+  background: linear-gradient(135deg, #7B2CBF 0%, #0B5CFF 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   color: #ffffff;
   font-weight: 900;
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(191, 64, 255, 0.8);
   cursor: pointer;
-  overflow: hidden; /* Necesario para que el reflejo no se salga */
   z-index: 10;
-  
-  /* Sombra base */
-  box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.5), 
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    
-  /* Animaciones: Entrada + Pulso Neón Constante */
-  animation: popInBtn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-             neonPulsePurple 2s infinite alternate;
+  /* Sombra estática (no animada) para ahorrar recursos */
+  box-shadow: 0 4px 15px rgba(11, 92, 255, 0.4);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-    /* Esto es lo que hace que el botón aparezca cuando JS encuentra imágenes */
+/* Para que aparezca cuando el JS lo mande */
 .winners-premium-btn.show {
   display: flex;
 }
 
-/* Ocultamos la imagen en miniatura sin borrarla del HTML para que no falle el JS */
 .winners-premium-btn img {
   display: none !important; 
 }
 
-/* Agregamos un destello decorativo al texto */
 .winners-premium-btn span::before {
-  content: "✨ ";
-  filter: drop-shadow(0 0 5px #fff);
+  content: "🏆 "; /* Un trofeo rinde mejor que los destellos con drop-shadow */
 }
 
-/* Efecto de toque (Click) */
 .winners-premium-btn:active { 
   transform: scale(0.92); 
-  filter: brightness(1.2);
 }
 
-/* MAGIA 1: El reflejo de luz (Shine) que pasa por encima del botón */
+/* EFECTO 1: Anillo expansivo (Pulso ligero y optimizado) */
 .winners-premium-btn::before {
   content: "";
   position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  border: 2px solid rgba(123, 44, 191, 0.8);
+  opacity: 0;
+  /* Animamos SOLO transform y opacity (Costo de rendimiento casi cero) */
+  animation: fastPulseRing 2s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* EFECTO 2: Reflejo de cristal (Shine) ultra rápido */
+.winners-premium-btn::after {
+  content: "";
+  position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: skewX(-25deg);
-  animation: premiumShineSweep 3.5s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  /* Usamos translateX en lugar de 'left' para evitar el Reflow del navegador */
+  transform: skewX(-25deg) translateX(-250%);
+  animation: fastGlassShine 4s infinite;
+  pointer-events: none;
+  will-change: transform;
 }
 
-/* MAGIA 2: El latido y resplandor neón */
-@keyframes neonPulsePurple {
-  0% {
-    box-shadow: 
-      0 0 10px rgba(138, 43, 226, 0.4), 
-      0 0 20px rgba(138, 43, 226, 0.2), 
-      inset 0 0 10px rgba(191, 64, 255, 0.3);
-    transform: scale(1) translateY(0);
-  }
-  100% {
-    box-shadow: 
-      0 0 20px rgba(191, 64, 255, 0.8), 
-      0 0 40px rgba(191, 64, 255, 0.5), 
-      0 0 60px rgba(138, 43, 226, 0.3), 
-      inset 0 0 15px rgba(255, 120, 255, 0.6);
-    transform: scale(1.03) translateY(-2px);
-  }
+/* Animaciones GPU-Accelerated */
+@keyframes fastPulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0; }
 }
 
-/* Animación del reflejo de luz */
-@keyframes premiumShineSweep {
-  0% { left: -100%; }
-  20% { left: 200%; }
-  100% { left: 200%; } /* Pausa antes de repetir */
-}
-
-/* Entrada inicial suave y con rebote */
-@keyframes popInBtn { 
-  from { opacity: 0; transform: scale(0.5) translateY(-10px); } 
-  to { opacity: 1; transform: scale(1) translateY(0); } 
+@keyframes fastGlassShine {
+  0% { transform: skewX(-25deg) translateX(-250%); }
+  15% { transform: skewX(-25deg) translateX(300%); }
+  100% { transform: skewX(-25deg) translateX(300%); }
 }
 
 /* Carrusel Fullscreen */
