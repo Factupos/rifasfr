@@ -489,358 +489,29 @@ transform:scale(.92);
 
 
 /* =========================================================
-   BOTÓN CTA PRINCIPAL — ULTRA PREMIUM / LIQUID GLASS
+   BOTÓN FINALIZAR (Llamado a la acción - Éxito)
    ========================================================= */
-.finish-top-button{
-  --cta-bg-1: rgba(6, 22, 54, .94);
-  --cta-bg-2: rgba(9, 40, 92, .92);
-  --cta-cyan: #46d8ff;
-  --cta-royal: #2b6cff;
-  --cta-emerald: #19d98b;
-  --cta-gold: #ffcf5a;
-  --cta-ink: #f8fcff;
-  --cta-ring: rgba(255,255,255,.22);
-  --cta-ring-strong: rgba(255,255,255,.38);
-  --cta-shadow: rgba(3, 10, 30, .48);
-  --cta-halo-a: rgba(70, 216, 255, .34);
-  --cta-halo-b: rgba(25, 217, 139, .24);
-  --cta-halo-c: rgba(255, 207, 90, .16);
-  --press-scale: .965;
-
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-
-  flex: 1.12 1 0 !important;
+.finish-top-button {
+  flex: 1 1 0 !important; /* Fuerza a compartir el espacio al 50% */
   min-width: 0;
-  height: 58px;
-  padding: 0 18px;
-  border: 1px solid var(--cta-ring);
-  border-radius: 20px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  font-weight: 950;
-  font-size: 14px;
-  letter-spacing: 1.05px;
-  text-transform: uppercase;
-  color: var(--cta-ink);
-  cursor: pointer;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  appearance: none;
-
-  background:
-    radial-gradient(140% 160% at 0% 0%, rgba(255,255,255,.22) 0%, transparent 34%),
-    radial-gradient(120% 140% at 100% 100%, rgba(25,217,139,.18) 0%, transparent 34%),
-    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04) 32%, rgba(255,255,255,.02) 100%),
-    linear-gradient(135deg, var(--cta-bg-1) 0%, var(--cta-bg-2) 42%, rgba(7, 90, 120, .92) 100%);
-
-  backdrop-filter: blur(18px) saturate(155%);
-  -webkit-backdrop-filter: blur(18px) saturate(155%);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.24),
-    inset 0 -10px 18px rgba(0,0,0,.16),
-    inset 0 0 0 1px rgba(255,255,255,.05),
-    0 10px 24px var(--cta-shadow),
-    0 0 0 1px rgba(255,255,255,.03),
-    0 0 22px var(--cta-halo-a),
-    0 0 34px var(--cta-halo-b);
-
-  transform: translateZ(0);
-  transition:
-    transform .24s cubic-bezier(.22,1,.36,1),
-    box-shadow .28s ease,
-    border-color .28s ease,
-    filter .28s ease,
-    background .28s ease;
-  animation:
-    ctaBreath 3.8s ease-in-out infinite,
-    ctaHaloPulse 2.8s ease-in-out infinite;
-}
-
-.finish-top-button::before{
-  content:"";
-  position:absolute;
-  inset: 1px;
-  border-radius: 19px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05) 24%, rgba(255,255,255,0) 46%),
-    radial-gradient(85% 65% at 50% 0%, rgba(255,255,255,.24) 0%, transparent 72%);
-  opacity:.95;
-  pointer-events:none;
-  z-index: 0;
-}
-
-.finish-top-button::after{
-  content:"";
-  position:absolute;
-  inset:-35%;
-  background:
-    linear-gradient(
-      115deg,
-      transparent 18%,
-      rgba(255,255,255,0) 34%,
-      rgba(255,255,255,.08) 42%,
-      rgba(255,255,255,.36) 50%,
-      rgba(255,255,255,.08) 58%,
-      rgba(255,255,255,0) 66%,
-      transparent 82%
-    );
-  transform: translateX(-135%) rotate(10deg);
-  opacity: .9;
-  pointer-events:none;
-  z-index: 1;
-  animation: ctaSheen 4.8s cubic-bezier(.22,1,.36,1) infinite;
-}
-
-.finish-top-button .cta-inner{
-  position: relative;
-  z-index: 3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 10px;
-  width:100%;
-}
-
-.finish-top-button .cta-orb{
-  position: relative;
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 35% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.42) 22%, rgba(255,255,255,0) 36%),
-    conic-gradient(from 180deg, var(--cta-cyan), var(--cta-royal), var(--cta-emerald), var(--cta-gold), var(--cta-cyan));
-  box-shadow:
-    inset 0 1px 1px rgba(255,255,255,.45),
-    0 0 0 1px rgba(255,255,255,.22),
-    0 0 16px rgba(70,216,255,.38),
-    0 0 24px rgba(25,217,139,.20);
-}
-
-.finish-top-button .cta-orb::after{
-  content:"";
-  position:absolute;
-  inset:-8px;
-  border-radius:inherit;
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 0 18px rgba(70,216,255,.16),
-    0 0 28px rgba(25,217,139,.12);
-  opacity:.9;
-  animation: ctaOrbPulse 2.1s ease-in-out infinite;
-}
-
-.finish-top-button .cta-label{
-  position: relative;
-  z-index: 3;
-  display:inline-flex;
-  align-items:center;
-  gap: 8px;
-  white-space: nowrap;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.08),
-    0 3px 10px rgba(0,0,0,.34);
-}
-
-.finish-top-button .cta-label strong{
-  font-weight: 1000;
+  height: 54px; /* Misma altura que el aleatorio */
+  border-radius: 16px;
+  font-weight: 900; font-size: 14px; letter-spacing: 1px;
+  text-transform: uppercase; border: none; cursor: pointer;
   color: #ffffff;
+  background: linear-gradient(135deg, #00D46A 0%, #00994D 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 8px 20px rgba(0, 212, 106, 0.4);
+  display: none; /* Lo maneja JS */
+  align-items: center; justify-content: center; gap: 8px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: pulseFinishPremium 2s infinite;
 }
+.finish-top-button:active { transform: scale(0.92); animation: none; }
 
-.finish-top-button .cta-badge{
-  position: relative;
-  z-index: 3;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width: 24px;
-  height: 24px;
-  padding: 0 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.16);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.07)),
-    linear-gradient(135deg, rgba(255,207,90,.22), rgba(70,216,255,.12));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.24),
-    0 4px 10px rgba(0,0,0,.18);
-  font-size: 10px;
-  letter-spacing: .8px;
-  font-weight: 950;
-  color: rgba(255,255,255,.94);
-}
-
-.finish-top-button:hover{
-  transform: translateY(-2px) scale(1.015);
-  border-color: var(--cta-ring-strong);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.26),
-    inset 0 -12px 20px rgba(0,0,0,.16),
-    0 16px 34px rgba(3,10,30,.44),
-    0 0 28px rgba(70,216,255,.30),
-    0 0 42px rgba(25,217,139,.20),
-    0 0 56px rgba(255,207,90,.10);
-  filter: brightness(1.03) saturate(1.05);
-}
-
-.finish-top-button:focus-visible{
-  border-color: rgba(255,255,255,.5);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.28),
-    0 0 0 3px rgba(70,216,255,.18),
-    0 0 0 6px rgba(25,217,139,.10),
-    0 16px 34px rgba(3,10,30,.44),
-    0 0 30px rgba(70,216,255,.30);
-}
-
-.finish-top-button:active,
-.finish-top-button.is-pressed{
-  transform: scale(var(--press-scale)) translateY(1px);
-  filter: brightness(1.02) saturate(1.08);
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.18),
-    inset 0 14px 24px rgba(0,0,0,.14),
-    0 8px 18px rgba(3,10,30,.34),
-    0 0 18px rgba(70,216,255,.22),
-    0 0 24px rgba(25,217,139,.16);
-  animation-play-state: paused;
-}
-
-.finish-top-button .cta-ripple{
-  position:absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  pointer-events:none;
-  z-index: 2;
-  transform: translate(-50%, -50%) scale(0);
-  background:
-    radial-gradient(circle, rgba(255,255,255,.40) 0%, rgba(70,216,255,.22) 36%, rgba(25,217,139,.12) 58%, rgba(255,255,255,0) 72%);
-  animation: ctaRipple .72s cubic-bezier(.22,1,.36,1) forwards;
-}
-
-@keyframes ctaBreath{
-  0%,100%{
-    transform: translateZ(0) scale(1);
-    filter: brightness(1) saturate(1);
-  }
-  50%{
-    transform: translateZ(0) scale(1.012);
-    filter: brightness(1.025) saturate(1.04);
-  }
-}
-
-@keyframes ctaHaloPulse{
-  0%,100%{
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.24),
-      inset 0 -10px 18px rgba(0,0,0,.16),
-      inset 0 0 0 1px rgba(255,255,255,.05),
-      0 10px 24px var(--cta-shadow),
-      0 0 0 1px rgba(255,255,255,.03),
-      0 0 18px rgba(70,216,255,.22),
-      0 0 28px rgba(25,217,139,.14);
-  }
-  50%{
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.24),
-      inset 0 -10px 18px rgba(0,0,0,.16),
-      inset 0 0 0 1px rgba(255,255,255,.05),
-      0 12px 28px var(--cta-shadow),
-      0 0 0 1px rgba(255,255,255,.03),
-      0 0 26px rgba(70,216,255,.34),
-      0 0 38px rgba(25,217,139,.20),
-      0 0 52px rgba(255,207,90,.10);
-  }
-}
-
-@keyframes ctaSheen{
-  0%, 58%, 100%{
-    transform: translateX(-135%) rotate(10deg);
-    opacity: 0;
-  }
-  64%{
-    opacity: .9;
-  }
-  82%{
-    transform: translateX(135%) rotate(10deg);
-    opacity: .92;
-  }
-  83%{
-    opacity: 0;
-  }
-}
-
-@keyframes ctaOrbPulse{
-  0%,100%{
-    transform: scale(.92);
-    opacity: .45;
-  }
-  50%{
-    transform: scale(1.16);
-    opacity: .95;
-  }
-}
-
-@keyframes ctaRipple{
-  0%{
-    opacity: .95;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  70%{
-    opacity: .42;
-    transform: translate(-50%, -50%) scale(11);
-  }
-  100%{
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(14);
-  }
-}
-
-@media (max-width: 480px){
-  .finish-top-button{
-    height: 60px;
-    border-radius: 21px;
-    padding: 0 16px;
-    font-size: 13px;
-    letter-spacing: .95px;
-  }
-
-  .finish-top-button .cta-label{
-    gap: 7px;
-  }
-
-  .finish-top-button .cta-orb{
-    width: 20px;
-    height: 20px;
-    flex-basis: 20px;
-  }
-
-  .finish-top-button .cta-badge{
-    min-width: 22px;
-    height: 22px;
-    font-size: 9px;
-    padding: 0 7px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce){
-  .finish-top-button,
-  .finish-top-button::after,
-  .finish-top-button .cta-orb::after{
-    animation: none !important;
-  }
-
-  .finish-top-button,
-  .finish-top-button:active{
-    transition: none;
-  }
+@keyframes pulseFinishPremium {
+  0% { box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 0 0 0 rgba(0,212,106, 0.7); }
+  70% { box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 0 0 12px rgba(0,212,106, 0); }
+  100% { box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 0 0 0 rgba(0,212,106, 0); }
 }
 /* =========================================================
    BUSCADOR Y GRILLA (NO BORRAR - Mantienen el diseño intacto)
@@ -2990,7 +2661,10 @@ header{
   </div>
 </div>
 
-  <button id="branchBackBtn" class="branch-back-btn" type="button" aria-label="Volver al panel principal" title="Volver al panel principal">
+</div>
+</div>
+
+<button id="branchBackBtn" class="branch-back-btn" type="button" aria-label="Volver al panel principal" title="Volver al panel principal">
   <span class="branch-back-btn__fx" aria-hidden="true"></span>
   <span class="branch-back-btn__core">
     <svg class="branch-back-btn__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -3019,15 +2693,7 @@ header{
     
     <div class="action-buttons">
       <button class="random-button" id="randomButton">✨ ALEATORIO</button>
-      <button id="finishTop" class="finish-top-button" type="button" aria-label="Finalizar selección">
-        <span class="cta-inner">
-          <span class="cta-orb" aria-hidden="true"></span>
-          <span class="cta-label">
-            <strong>Finalizar</strong>
-            <span class="cta-badge">PRO</span>
-          </span>
-        </span>
-      </button>
+      <button id="finishTop" class="finish-top-button" type="button">✅ FINALIZAR</button>
     </div>
 
     <div id="cartPanel" class="cart-panel" aria-live="polite"></div>
@@ -3520,47 +3186,21 @@ function hideBranchEnterOverlay(){
   ov.classList.remove('show');
   ov.setAttribute('aria-hidden', 'true');
 }
-function navigateToBranchUrl(targetUrl){
-  if(!targetUrl) return;
-  try{ sessionStorage.setItem('__last_branch_target__', targetUrl); }catch(_){ }
-
-  const go = ()=>{
-    try{ location.assign(targetUrl); }
-    catch(_){ location.href = targetUrl; }
-  };
-
-  if(document.startViewTransition){
-    try{
-      document.startViewTransition(()=>{ go(); });
-      return;
-    }catch(_){ }
-  }
-
-  requestAnimationFrame(()=> setTimeout(go, 24));
-}
 function openBranch(branch){
   if(!branch || BRANCH_SELECTION_LOCK) return;
-
-  const safeSheetId = sanitizeSheetId(branch.sheetId);
-  if(!safeSheetId){
-    msg('Esta sucursal no tiene un Sheet ID válido en la columna C.', true);
-    BRANCH_SELECTION_LOCK = false;
-    return;
-  }
-
   BRANCH_SELECTION_LOCK = true;
+  
+  // ✅ Siempre usa el sheetId específico de la sucursal de la columna C
+  const safeSheetId = sanitizeSheetId(branch.sheetId);
   const branchBid = String(branch.index ?? '');
+  
   const active = document.querySelector(`.branch-card[data-branch-index="${Number(branch.index ?? 0)}"]`);
   if(active) active.classList.add('is-entering');
 
-  showBranchEnterOverlay(branch);
-
+  // ✅ Siempre arma la URL forzando el ID propio de la sucursal
   const targetUrl = buildPanelUrl(safeSheetId, { branchopen:true, bid: branchBid });
-  navigateToBranchUrl(targetUrl);
 
-  setTimeout(()=>{
-    BRANCH_SELECTION_LOCK = false;
-  }, 1800);
+  location.href = targetUrl;
 }
 function renderBranchSelector(branches){
   BRANCHES = Array.isArray(branches) ? branches.slice() : [];
@@ -3596,25 +3236,13 @@ function renderBranchSelector(branches){
     }).join('');
     
     grid.querySelectorAll('.branch-card').forEach(el=>{
-      const triggerOpen = (ev)=>{
-        if(ev){
-          if(typeof ev.preventDefault === 'function') ev.preventDefault();
-          if(typeof ev.stopPropagation === 'function') ev.stopPropagation();
-        }
+      el.addEventListener('click', ()=>{
         const idx = Number(el.getAttribute('data-branch-index'));
         const branch = BRANCHES[idx];
         if(!branch) return;
         el.classList.add('is-entering');
         openBranch(branch);
-      };
-
-      el.addEventListener('click', triggerOpen);
-      el.addEventListener('pointerup', triggerOpen, {passive:false});
-      el.addEventListener('keydown', (ev)=>{
-        if(ev.key === 'Enter' || ev.key === ' '){
-          triggerOpen(ev);
-        }
-      });
+      }, {passive:true});
     });
   }
   
@@ -4767,43 +4395,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
       finalizeCart();
     });
   }
-
-
-  function attachPremiumCTA(button){
-    if(!button || button.dataset.ctaWired === '1') return;
-    button.dataset.ctaWired = '1';
-
-    const createRipple = (clientX, clientY) => {
-      const rect = button.getBoundingClientRect();
-      const ripple = document.createElement('span');
-      ripple.className = 'cta-ripple';
-      ripple.style.left = `${clientX - rect.left}px`;
-      ripple.style.top = `${clientY - rect.top}px`;
-      button.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove(), { once:true });
-    };
-
-    button.addEventListener('pointerdown', (e) => {
-      button.classList.add('is-pressed');
-      createRipple(e.clientX, e.clientY);
-    }, { passive:true });
-
-    const release = () => button.classList.remove('is-pressed');
-    button.addEventListener('pointerup', release, { passive:true });
-    button.addEventListener('pointercancel', release, { passive:true });
-    button.addEventListener('pointerleave', release, { passive:true });
-
-    button.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' '){
-        button.classList.add('is-pressed');
-        const rect = button.getBoundingClientRect();
-        createRipple(rect.left + rect.width / 2, rect.top + rect.height / 2);
-      }
-    });
-    button.addEventListener('keyup', release);
-  }
-
-  attachPremiumCTA(finishTopBtn);
 
   // ARRANQUE EXPRESS (con boot)
   bootSet(60, 'Cargando boletas…', 'Usando caché para abrir ultra rápido');
