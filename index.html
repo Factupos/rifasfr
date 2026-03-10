@@ -4169,11 +4169,11 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   window.addEventListener('resize', ()=>requestAnimationFrame(applyViewportOffset), { passive:true });
 
   // Carga base (config + logo) en paralelo para que boot se vea pro y rápido
-  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección y logo');
+  bootSet(18, 'Cargando configuración…', 'Aplicando nombre, teléfono, dirección, logo y ganadores');
   await Promise.allSettled([
     loadConfigFast(),
-    loadLogoFast()
-    loadWinnersFast()
+    loadLogoFast(),   // <--- ¡AQUÍ ESTÁ LA COMA QUE FALTABA!
+    loadWinnersFast() // <-- LA NUEVA MAGIA AQUÍ
   ]);
 
   // Título boot con el nombre (si ya está disponible)
