@@ -3534,9 +3534,12 @@ async function loadLogoFast(){
 /* =========================================================
    🏆 LÓGICA DE ÚLTIMOS GANADORES (Interacción Premium)
    ========================================================= */
+/* =========================================================
+   🏆 LÓGICA DE ÚLTIMOS GANADORES (Neón Premium & Interacción)
+   ========================================================= */
 let winnersImages = [];
 let winnersAutoPlayTimer = null;
-let winnersResumeTimer = null; // Controla la espera de 6 segundos
+let winnersResumeTimer = null;
 
 async function loadWinnersFast() {
   try {
@@ -3550,7 +3553,7 @@ async function loadWinnersFast() {
     if (winnersImages.length > 0) {
       const bubble = document.getElementById('winnersBubble');
       if (bubble) {
-        // Solo mostramos el botón, sin intentar cargar miniatura
+        // Solo mostramos el botón neón, sin inyectar miniatura
         bubble.classList.add('show');
       }
       buildWinnersCarousel();
@@ -3576,7 +3579,6 @@ function buildWinnersCarousel() {
     track.appendChild(slide);
   });
 
-  // Forzamos la suavidad nativa del sistema operativo para evitar saltos bruscos
   track.style.scrollBehavior = 'smooth';
 
   bubble.addEventListener('click', () => {
@@ -3590,56 +3592,46 @@ function buildWinnersCarousel() {
     lightbox.classList.remove('show');
     lightbox.setAttribute('aria-hidden', 'true');
     stopWinnersAutoPlay();
-    clearTimeout(winnersResumeTimer); // Apagamos el reinicio si cierra el carrusel
+    clearTimeout(winnersResumeTimer);
     setTimeout(() => track.scrollTo({ left: 0, behavior: 'instant' }), 300);
   };
 
   closeBtn.addEventListener('click', closeCarousel);
 
-  // === DETECCIÓN INTELIGENTE DE TOQUE HUMANO ===
-  
-  // 1. Cuando el usuario pone el dedo (o hace clic)
+  // === DETECCIÓN INTELIGENTE DE TOQUE ===
   const onHumanTouchStart = () => {
-    stopWinnersAutoPlay(); // Frena la animación de inmediato
-    clearTimeout(winnersResumeTimer); // Cancela cualquier reinicio pendiente
+    stopWinnersAutoPlay();
+    clearTimeout(winnersResumeTimer);
   };
 
-  // 2. Cuando el usuario quita el dedo (suelta la pantalla)
   const onHumanTouchEnd = () => {
     clearTimeout(winnersResumeTimer);
-    // Programa el arranque automático exactamente 6 segundos (6000ms) después
     winnersResumeTimer = setTimeout(() => {
       startWinnersAutoPlay();
     }, 6000);
   };
 
-  // Eventos de entrada (poner el dedo)
   track.addEventListener('touchstart', onHumanTouchStart, { passive: true });
   track.addEventListener('mousedown', onHumanTouchStart, { passive: true });
-
-  // Eventos de salida (quitar el dedo)
   track.addEventListener('touchend', onHumanTouchEnd, { passive: true });
   track.addEventListener('mouseup', onHumanTouchEnd, { passive: true });
-  track.addEventListener('wheel', onHumanTouchEnd, { passive: true }); // Por si desliza en PC
+  track.addEventListener('wheel', onHumanTouchEnd, { passive: true });
 }
 
 function startWinnersAutoPlay() {
   const track = document.getElementById('winnersTrack');
   if (!track || winnersImages.length <= 1) return;
   
-  stopWinnersAutoPlay(); // Asegura que no se dupliquen velocidades
+  stopWinnersAutoPlay(); 
   
-  // Se mueve cada 3 segundos (3000ms)
   winnersAutoPlayTimer = setInterval(() => {
     const slideWidth = track.clientWidth;
     const currentScroll = track.scrollLeft;
     const maxScroll = track.scrollWidth - slideWidth;
     
-    // Si llegó a la última foto, vuelve a la primera
     if (currentScroll >= maxScroll - 10) {
       track.scrollTo({ left: 0, behavior: 'smooth' });
     } else {
-      // Avanza a la siguiente foto de manera natural
       track.scrollBy({ left: slideWidth, behavior: 'smooth' });
     }
   }, 3000);
