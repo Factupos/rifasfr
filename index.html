@@ -455,63 +455,468 @@ transform:scale(.92);
 .clear-search:active { background: #FF2E2E; transform: translateY(-50%) scale(0.85); }
 
 /* =========================================================
-   BOTÓN ALEATORIO (Premium & Mágico)
+   CTA PRINCIPAL PREMIUM — Apple Liquid Glass / Luxury Tech
+   Reemplaza el bloque anterior de .action-buttons, .random-button
+   y .finish-top-button
    ========================================================= */
-.action-buttons {
-  display: flex;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 12px; /* Separación perfecta */
+.action-buttons{
+  display:flex;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  gap:12px;
+  isolation:isolate;
 }
 
-/* =========================================================
-   BOTÓN ALEATORIO (Premium & Mágico)
-   ========================================================= */
-.random-button {
-  flex: 1 1 0 !important; /* Fuerza a compartir el espacio al 50% */
-  min-width: 0;
-  height: 54px; /* Botón más alto y fácil de tocar */
-  border-radius: 16px;
-  font-weight: 900; font-size: 14px; letter-spacing: 1px;
-  text-transform: uppercase; border: none; cursor: pointer;
-  color: #ffffff;
-  background: linear-gradient(135deg, #7B2CBF 0%, #0B5CFF 100%);
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), 0 8px 20px rgba(11, 92, 255, 0.4);
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+.random-button,
+.finish-top-button{
+  position:relative;
+  flex:1 1 0 !important;
+  min-width:0;
+  height:60px;
+  padding:0;
+  border:none;
+  outline:none;
+  border-radius:22px;
+  cursor:pointer;
+  overflow:hidden;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition:
+    transform .20s cubic-bezier(.22,1,.36,1),
+    filter .25s ease,
+    box-shadow .28s ease,
+    opacity .25s ease;
 }
-.random-button:active { transform: scale(0.92); filter: brightness(1.2); }
-.contact-info { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-.contact-info p { margin: 0; font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 700; letter-spacing: 0.5px; }
 
-
-/* =========================================================
-   BOTÓN FINALIZAR (Llamado a la acción - Éxito)
-   ========================================================= */
-.finish-top-button {
-  flex: 1 1 0 !important; /* Fuerza a compartir el espacio al 50% */
-  min-width: 0;
-  height: 54px; /* Misma altura que el aleatorio */
-  border-radius: 16px;
-  font-weight: 900; font-size: 14px; letter-spacing: 1px;
-  text-transform: uppercase; border: none; cursor: pointer;
-  color: #ffffff;
-  background: linear-gradient(135deg, #00D46A 0%, #00994D 100%);
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 8px 20px rgba(0, 212, 106, 0.4);
-  display: none; /* Lo maneja JS */
-  align-items: center; justify-content: center; gap: 8px;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: pulseFinishPremium 2s infinite;
+/* Mantiene el control por JS original */
+.finish-top-button{
+  display:none;
 }
-.finish-top-button:active { transform: scale(0.92); animation: none; }
 
-@keyframes pulseFinishPremium {
-  0% { box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 0 0 0 rgba(0,212,106, 0.7); }
-  70% { box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 0 0 12px rgba(0,212,106, 0); }
-  100% { box-shadow: inset 0 2px 0 rgba(255,255,255,0.4), 0 0 0 0 rgba(0,212,106, 0); }
+/* =========================
+   Estructura premium común
+   ========================= */
+.cta-premium{
+  --cta-ink:#ffffff;
+  --cta-top-gloss:rgba(255,255,255,.34);
+  --cta-glass-line:rgba(255,255,255,.22);
+  --cta-glass-line-2:rgba(255,255,255,.10);
+  --cta-inner-highlight:rgba(255,255,255,.18);
+  --cta-shadow-deep:rgba(0,0,0,.34);
+  --cta-shadow-soft:rgba(0,0,0,.18);
+  --cta-halo:rgba(11,92,255,.26);
+  --cta-halo-2:rgba(0,212,106,.20);
+  --cta-halo-3:rgba(255,196,0,.14);
+  --cta-ripple:rgba(255,255,255,.34);
+  --cta-ripple-edge:rgba(255,255,255,.06);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -10px 18px rgba(0,0,0,.10),
+    0 10px 24px var(--cta-shadow-deep),
+    0 3px 8px var(--cta-shadow-soft),
+    0 0 0 1px rgba(255,255,255,.06),
+    0 0 20px var(--cta-halo),
+    0 0 30px var(--cta-halo-2);
+  animation: ctaPremiumBreath 3.6s ease-in-out infinite;
+}
+
+.cta-premium::before,
+.cta-premium::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+}
+
+.cta-premium::before{
+  inset:-1px;
+  padding:1px;
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,.70) 0%,
+      rgba(255,255,255,.26) 14%,
+      rgba(255,255,255,.10) 42%,
+      rgba(255,255,255,.20) 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:.95;
+  z-index:4;
+}
+
+.cta-premium::after{
+  inset:1px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.18) 0%, transparent 52%),
+    linear-gradient(180deg, rgba(255,255,255,.08), transparent 38%);
+  opacity:.9;
+  z-index:1;
+}
+
+.cta-premium__bg,
+.cta-premium__halo,
+.cta-premium__sheen,
+.cta-premium__depth,
+.cta-premium__content{
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+}
+
+.cta-premium__bg{
+  z-index:0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.22) 0%, transparent 26%),
+    radial-gradient(circle at 82% 24%, rgba(0,229,255,.18) 0%, transparent 22%),
+    linear-gradient(135deg, #114dff 0%, #1f7cff 34%, #00c8ff 66%, #00d46a 100%);
+  filter:saturate(1.08) contrast(1.04);
+}
+
+.cta-premium__depth{
+  z-index:1;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.14), transparent 34%),
+    linear-gradient(180deg, transparent 42%, rgba(0,0,0,.16) 100%),
+    radial-gradient(circle at 50% 115%, rgba(0,0,0,.20), transparent 48%);
+  mix-blend-mode:screen;
+  opacity:.82;
+}
+
+.cta-premium__halo{
+  z-index:0;
+  inset:-14%;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 50% 50%, var(--cta-halo) 0%, transparent 52%),
+    radial-gradient(circle at 25% 50%, var(--cta-halo-2) 0%, transparent 44%),
+    radial-gradient(circle at 78% 55%, var(--cta-halo-3) 0%, transparent 36%);
+  filter:blur(14px);
+  opacity:.8;
+  animation: ctaHaloPulse 3.8s ease-in-out infinite;
+}
+
+.cta-premium__sheen{
+  z-index:3;
+  inset:auto;
+  top:-30%;
+  left:-45%;
+  width:58%;
+  height:180%;
+  border-radius:40px;
+  background:linear-gradient(
+    115deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.08) 32%,
+    rgba(255,255,255,.42) 50%,
+    rgba(255,255,255,.12) 67%,
+    rgba(255,255,255,0) 100%
+  );
+  transform:translateX(-140%) rotate(18deg);
+  filter:blur(.4px);
+  opacity:.72;
+  animation: ctaSheenSweep 5.8s cubic-bezier(.22,1,.36,1) infinite;
+}
+
+.cta-premium__content{
+  position:relative;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  inset:0;
+  padding:0 16px;
+}
+
+.cta-premium__icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,.08));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    0 3px 10px rgba(0,0,0,.16);
+  font-size:13px;
+  font-weight:1000;
+  line-height:1;
+  flex:0 0 auto;
+}
+
+.cta-premium__label{
+  color:var(--cta-ink);
+  font-size:14px;
+  font-weight:1000;
+  letter-spacing:1.25px;
+  text-transform:uppercase;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.12),
+    0 2px 10px rgba(0,0,0,.30);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* =========================
+   Variante aleatorio
+   ========================= */
+.random-button.cta-premium{
+  --cta-halo:rgba(11,92,255,.28);
+  --cta-halo-2:rgba(0,229,255,.18);
+  --cta-halo-3:rgba(0,212,106,.16);
+}
+
+.random-button .cta-premium__bg{
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.24) 0%, transparent 24%),
+    radial-gradient(circle at 84% 22%, rgba(0,229,255,.20) 0%, transparent 22%),
+    linear-gradient(135deg, #0b49ff 0%, #1667ff 28%, #00c7ff 66%, #00d46a 100%);
+}
+
+/* =========================
+   Variante finalizar
+   ========================= */
+.finish-top-button.cta-premium{
+  --cta-halo:rgba(0,212,106,.28);
+  --cta-halo-2:rgba(255,196,0,.18);
+  --cta-halo-3:rgba(11,92,255,.18);
+  animation:
+    ctaPremiumBreath 3.6s ease-in-out infinite,
+    ctaSuccessAura 2.6s ease-in-out infinite;
+}
+
+.finish-top-button .cta-premium__bg{
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255,255,255,.24) 0%, transparent 24%),
+    radial-gradient(circle at 82% 20%, rgba(255,220,120,.18) 0%, transparent 22%),
+    linear-gradient(135deg, #00a85c 0%, #00d46a 34%, #1ee08b 60%, #0b5cff 100%);
+}
+
+.cta-premium--success .cta-premium__icon{
+  background:linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.10));
+}
+
+/* =========================
+   Hover / focus / press
+   ========================= */
+@media (hover:hover){
+  .random-button:hover,
+  .finish-top-button:hover{
+    transform:translateY(-2px) scale(1.015);
+    filter:brightness(1.04) saturate(1.04);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.28),
+      inset 0 -10px 18px rgba(0,0,0,.08),
+      0 16px 34px rgba(0,0,0,.34),
+      0 6px 14px rgba(0,0,0,.18),
+      0 0 0 1px rgba(255,255,255,.08),
+      0 0 24px var(--cta-halo),
+      0 0 36px var(--cta-halo-2);
+  }
+}
+
+.random-button:focus-visible,
+.finish-top-button:focus-visible{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -10px 18px rgba(0,0,0,.08),
+    0 12px 28px rgba(0,0,0,.34),
+    0 0 0 2px rgba(255,255,255,.18),
+    0 0 0 5px rgba(11,92,255,.18),
+    0 0 24px var(--cta-halo);
+}
+
+.random-button.is-pressed,
+.finish-top-button.is-pressed,
+.random-button:active,
+.finish-top-button:active{
+  transform:translateY(1px) scale(.972);
+  filter:brightness(1.03) saturate(1.02);
+  transition-duration:.10s;
+}
+
+.random-button.is-pressed .cta-premium__content,
+.finish-top-button.is-pressed .cta-premium__content{
+  transform:translateY(1px);
+}
+
+.random-button.is-pressed .cta-premium__halo,
+.finish-top-button.is-pressed .cta-premium__halo{
+  opacity:.94;
+  filter:blur(12px);
+}
+
+/* Ripple premium */
+.cta-premium__ripple{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:14px;
+  height:14px;
+  transform:translate(-50%, -50%) scale(0);
+  border-radius:999px;
+  pointer-events:none;
+  z-index:2;
+  background:
+    radial-gradient(circle,
+      var(--cta-ripple) 0%,
+      rgba(255,255,255,.18) 26%,
+      rgba(255,255,255,.06) 54%,
+      transparent 72%);
+  box-shadow:
+    0 0 0 1px var(--cta-ripple-edge),
+    0 0 28px rgba(255,255,255,.16);
+  animation: ctaRippleExpand .72s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+/* Estados busy opcionales */
+.random-button[data-busy="1"]{
+  filter:saturate(.96) brightness(.98);
+}
+
+.random-button[data-busy="1"] .cta-premium__sheen{
+  animation-duration:2.8s;
+}
+
+@keyframes ctaPremiumBreath{
+  0%,100%{
+    transform:translateZ(0) scale(1);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.26),
+      inset 0 -10px 18px rgba(0,0,0,.10),
+      0 10px 24px rgba(0,0,0,.34),
+      0 3px 8px rgba(0,0,0,.18),
+      0 0 0 1px rgba(255,255,255,.06),
+      0 0 20px var(--cta-halo),
+      0 0 30px var(--cta-halo-2);
+  }
+  50%{
+    transform:translateZ(0) scale(1.012);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.28),
+      inset 0 -10px 18px rgba(0,0,0,.08),
+      0 14px 30px rgba(0,0,0,.36),
+      0 4px 12px rgba(0,0,0,.20),
+      0 0 0 1px rgba(255,255,255,.08),
+      0 0 24px var(--cta-halo),
+      0 0 36px var(--cta-halo-2),
+      0 0 42px var(--cta-halo-3);
+  }
+}
+
+@keyframes ctaHaloPulse{
+  0%,100%{
+    transform:scale(.98);
+    opacity:.68;
+  }
+  50%{
+    transform:scale(1.045);
+    opacity:.96;
+  }
+}
+
+@keyframes ctaSheenSweep{
+  0%, 62%{
+    transform:translateX(-155%) rotate(18deg);
+    opacity:0;
+  }
+  68%{
+    opacity:.52;
+  }
+  78%{
+    transform:translateX(110%) rotate(18deg);
+    opacity:.78;
+  }
+  84%{
+    opacity:.12;
+  }
+  100%{
+    transform:translateX(130%) rotate(18deg);
+    opacity:0;
+  }
+}
+
+@keyframes ctaRippleExpand{
+  0%{
+    opacity:.95;
+    transform:translate(-50%, -50%) scale(0);
+  }
+  70%{
+    opacity:.34;
+    transform:translate(-50%, -50%) scale(14);
+  }
+  100%{
+    opacity:0;
+    transform:translate(-50%, -50%) scale(18);
+  }
+}
+
+@keyframes ctaSuccessAura{
+  0%,100%{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.28),
+      inset 0 -10px 18px rgba(0,0,0,.08),
+      0 12px 28px rgba(0,0,0,.34),
+      0 0 0 0 rgba(0,212,106,0),
+      0 0 22px rgba(0,212,106,.22),
+      0 0 30px rgba(255,196,0,.12);
+  }
+  55%{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.28),
+      inset 0 -10px 18px rgba(0,0,0,.08),
+      0 14px 32px rgba(0,0,0,.36),
+      0 0 0 10px rgba(0,212,106,0),
+      0 0 26px rgba(0,212,106,.28),
+      0 0 38px rgba(255,196,0,.18);
+  }
+}
+
+@media (max-width: 420px){
+  .random-button,
+  .finish-top-button{
+    height:58px;
+    border-radius:20px;
+  }
+
+  .cta-premium__label{
+    font-size:13px;
+    letter-spacing:1.05px;
+  }
+
+  .cta-premium__icon{
+    width:22px;
+    height:22px;
+    font-size:12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cta-premium,
+  .cta-premium__halo,
+  .cta-premium__sheen,
+  .finish-top-button.cta-premium{
+    animation:none !important;
+  }
+
+  .random-button,
+  .finish-top-button{
+    transition:none !important;
+  }
 }
 /* =========================================================
    BUSCADOR Y GRILLA (NO BORRAR - Mantienen el diseño intacto)
@@ -2692,9 +3097,28 @@ header{
     </div>
     
     <div class="action-buttons">
-      <button class="random-button" id="randomButton">✨ ALEATORIO</button>
-      <button id="finishTop" class="finish-top-button" type="button">✅ FINALIZAR</button>
-    </div>
+  <button class="random-button cta-premium" id="randomButton" type="button">
+    <span class="cta-premium__bg" aria-hidden="true"></span>
+    <span class="cta-premium__halo" aria-hidden="true"></span>
+    <span class="cta-premium__sheen" aria-hidden="true"></span>
+    <span class="cta-premium__depth" aria-hidden="true"></span>
+    <span class="cta-premium__content">
+      <span class="cta-premium__icon" aria-hidden="true">✦</span>
+      <span class="cta-premium__label">ALEATORIO</span>
+    </span>
+  </button>
+
+  <button id="finishTop" class="finish-top-button cta-premium cta-premium--success" type="button">
+    <span class="cta-premium__bg" aria-hidden="true"></span>
+    <span class="cta-premium__halo" aria-hidden="true"></span>
+    <span class="cta-premium__sheen" aria-hidden="true"></span>
+    <span class="cta-premium__depth" aria-hidden="true"></span>
+    <span class="cta-premium__content">
+      <span class="cta-premium__icon" aria-hidden="true">✓</span>
+      <span class="cta-premium__label">FINALIZAR</span>
+    </span>
+  </button>
+</div>
 
     <div id="cartPanel" class="cart-panel" aria-live="polite"></div>
   </header>
@@ -4430,6 +4854,52 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const before=DAILY.length; await syncMapFast(); if(DAILY.length!==before){ renderGrid(); }
   }, 20000);
 });
+
+    (function initPremiumCTAInteractions(){
+  const premiumButtons = Array.from(document.querySelectorAll('.cta-premium'));
+  if(!premiumButtons.length) return;
+
+  const addRipple = (btn, clientX, clientY) => {
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'cta-premium__ripple';
+    ripple.style.setProperty('--x', `${clientX - rect.left}px`);
+    ripple.style.setProperty('--y', `${clientY - rect.top}px`);
+    btn.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove(), { once:true });
+  };
+
+  premiumButtons.forEach((btn) => {
+    btn.addEventListener('pointerdown', (e) => {
+      btn.classList.add('is-pressed');
+      addRipple(btn, e.clientX, e.clientY);
+    }, { passive:true });
+
+    btn.addEventListener('pointerup', () => {
+      btn.classList.remove('is-pressed');
+    }, { passive:true });
+
+    btn.addEventListener('pointercancel', () => {
+      btn.classList.remove('is-pressed');
+    }, { passive:true });
+
+    btn.addEventListener('pointerleave', () => {
+      btn.classList.remove('is-pressed');
+    }, { passive:true });
+
+    btn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        btn.classList.add('is-pressed');
+        const rect = btn.getBoundingClientRect();
+        addRipple(btn, rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+    });
+
+    btn.addEventListener('keyup', () => {
+      btn.classList.remove('is-pressed');
+    });
+  });
+})();
   </script>
 </body>
 </html>
