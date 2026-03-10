@@ -1221,6 +1221,218 @@ body.search-has-text #raffles{ display:none !important; }
   font-size: 54px; background: transparent; opacity: 0.8;
 }
 
+/* ====== GANADORES / PRUEBA SOCIAL ====== */
+.branch-thumb{ overflow: visible; }
+
+.branch-winners-float{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:10px;
+  z-index:8;
+  padding:10px 12px 10px;
+  border-radius:20px;
+  border:1px solid rgba(255,215,120,.34);
+  background:
+    linear-gradient(180deg, rgba(12,16,30,.70), rgba(10,14,28,.52)),
+    radial-gradient(circle at 12% 0%, rgba(255,220,120,.20) 0%, transparent 34%);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 0 0 1px rgba(255,214,102,.05),
+    0 0 24px rgba(255,196,0,.12);
+  backdrop-filter: blur(22px) saturate(165%);
+  -webkit-backdrop-filter: blur(22px) saturate(165%);
+  overflow:hidden;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+.branch-winners-float::before,
+.branch-winners-float::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:24px;
+  pointer-events:none;
+  z-index:2;
+}
+.branch-winners-float::before{
+  left:0;
+  background:linear-gradient(90deg, rgba(9,12,24,.78), rgba(9,12,24,0));
+}
+.branch-winners-float::after{
+  right:0;
+  background:linear-gradient(270deg, rgba(9,12,24,.78), rgba(9,12,24,0));
+}
+
+.branch-winners-label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin:0 0 8px;
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:1.2px;
+  color:rgba(255,244,214,.96);
+  text-transform:uppercase;
+  text-shadow:0 1px 8px rgba(255,196,0,.22);
+}
+
+.branch-winners-marquee{
+  position:relative;
+  overflow:hidden;
+}
+
+.branch-winners-marquee-track{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  gap:10px;
+  will-change:transform;
+  animation:branchWinnersFlow 18s linear infinite;
+}
+
+.branch-winners-avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  flex:0 0 auto;
+  object-fit:cover;
+  border:1.5px solid rgba(255,228,155,.82);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.28),
+    0 0 0 2px rgba(255,255,255,.08),
+    0 0 20px rgba(255,196,0,.14);
+  background:rgba(255,255,255,.10);
+}
+
+@keyframes branchWinnersFlow{
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(-50%,0,0); }
+}
+
+.branch-winners-modal{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .28s ease;
+}
+.branch-winners-modal.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.branch-winners-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(3,6,14,.82);
+  backdrop-filter:blur(18px) saturate(135%);
+  -webkit-backdrop-filter:blur(18px) saturate(135%);
+}
+.branch-winners-dialog{
+  position:relative;
+  z-index:1;
+  width:min(100vw, 780px);
+  min-height:100dvh;
+  padding:calc(env(safe-area-inset-top,0px) + 22px) 16px calc(env(safe-area-inset-bottom,0px) + 18px);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.branch-winners-head{
+  padding-right:62px;
+}
+.branch-winners-kicker{
+  margin:0 0 6px;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  color:rgba(255,231,169,.92);
+}
+.branch-winners-title{
+  margin:0;
+  font-size:clamp(24px, 7vw, 34px);
+  line-height:1.04;
+  font-weight:1000;
+  color:#fff;
+  text-shadow:0 10px 30px rgba(0,0,0,.38);
+}
+.branch-winners-close{
+  position:absolute;
+  top:calc(env(safe-area-inset-top,0px) + 16px);
+  right:16px;
+  width:48px;
+  height:48px;
+  border:none;
+  border-radius:16px;
+  color:#fff;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08));
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 12px 30px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.18);
+  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+}
+.branch-winners-close:active{ transform:scale(.94); }
+
+.branch-winners-track{
+  flex:1 1 auto;
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding:4px 2px 6px;
+}
+.branch-winners-track::-webkit-scrollbar{ display:none; }
+
+.branch-winners-slide{
+  min-width:100%;
+  scroll-snap-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.branch-winners-card{
+  width:100%;
+  border-radius:30px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 24px 60px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.14);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+.branch-winners-card img{
+  display:block;
+  width:100%;
+  height:min(72dvh, 760px);
+  object-fit:contain;
+  background:radial-gradient(circle at 50% 0%, rgba(255,255,255,.06), transparent 40%), rgba(4,8,18,.44);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .branch-winners-marquee-track{ animation:none; }
+  .branch-winners-modal{ transition:none; }
+}
+
+@media (max-width: 520px){
+  .branch-winners-float{ left:10px; right:10px; bottom:8px; padding:9px 10px 9px; border-radius:18px; }
+  .branch-winners-avatar{ width:38px; height:38px; }
+  .branch-winners-card{ border-radius:24px; }
+}
+
 /* Overlays y botones base */
 .branch-enter-overlay{position:fixed; inset:0; z-index:99998; display:none; align-items:center; justify-content:center; padding:22px; background:rgba(4,10,24,.56); backdrop-filter:blur(18px) saturate(130%); -webkit-backdrop-filter:blur(18px) saturate(130%)}
 .branch-enter-overlay.show{display:flex}
@@ -2388,182 +2600,6 @@ header{
   }
 }
 
-    /* =========================================================
-   🏆 MINI CARRUSEL FLOTANTE (Modo Bestia)
-   ========================================================= */
-.mini-winners-module {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  height: 60px;
-  background: rgba(4, 10, 24, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 196, 0, 0.4); /* Borde dorado pro */
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.7), 0 0 20px rgba(255, 196, 0, 0.2);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
-  z-index: 10; /* Sobre la imagen de la sucursal */
-}
-
-.mini-winners-module:active {
-  transform: scale(0.95);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.8), 0 0 10px rgba(255, 196, 0, 0.4);
-}
-
-.mini-winners-badge {
-  background: linear-gradient(90deg, #FFC400, #FF7B00);
-  color: #000;
-  font-size: 10px;
-  font-weight: 1000;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 3px 0;
-  letter-spacing: 1.5px;
-  box-shadow: 0 2px 10px rgba(255, 196, 0, 0.4);
-}
-
-.mini-winners-track {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 8px;
-  padding: 0 8px;
-  width: max-content;
-  /* Animación agresiva pero fluida */
-  animation: scrollWinners 12s linear infinite;
-}
-
-.mini-winners-track img {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #FFC400;
-  box-shadow: 0 0 10px rgba(255, 196, 0, 0.5);
-  flex-shrink: 0;
-}
-
-@keyframes scrollWinners {
-  0% { transform: translateX(0); }
-  /* Se desplaza el 50% porque duplicamos las imágenes en JS */
-  100% { transform: translateX(-50%); } 
-}
-
-/* =========================================================
-   🎬 MODAL AMPLIADO (Galería de Ganadores)
-   ========================================================= */
-.super-winners-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.super-winners-modal.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.sw-modal-content {
-  position: relative;
-  width: min(92vw, 450px);
-  background: linear-gradient(180deg, #111a2e, #070e1a);
-  border: 1px solid rgba(255, 196, 0, 0.3);
-  border-radius: 28px;
-  padding: 24px 16px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 2px 0 rgba(255,255,255,0.1);
-  transform: translateY(20px) scale(0.95);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.super-winners-modal.show .sw-modal-content {
-  transform: translateY(0) scale(1);
-}
-
-.sw-close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 46, 46, 0.15);
-  color: #FF2E2E;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.sw-close-btn:active {
-  background: #FF2E2E;
-  color: #fff;
-  transform: scale(0.9);
-}
-
-.sw-title {
-  color: #FFC400;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 1000;
-  margin: 0 0 4px 0;
-  text-shadow: 0 0 15px rgba(255, 196, 0, 0.3);
-}
-
-.sw-subtitle {
-  color: rgba(255,255,255,0.6);
-  text-align: center;
-  font-size: 13px;
-  margin: 0 0 20px 0;
-}
-
-/* Carrusel horizontal tipo tarjeta de iOS */
-.sw-gallery {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 12px;
-  scrollbar-width: none; /* Firefox */
-}
-
-.sw-gallery::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
-.sw-slide {
-  flex: 0 0 85%;
-  scroll-snap-align: center;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-  aspect-ratio: 4/5; /* Formato vertical perfecto para retratos */
-}
-
-.sw-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 </style>
 
 </head>
@@ -2622,6 +2658,18 @@ header{
         </div>
       </div>
       <div id="branchGrid" class="branch-grid"></div>
+    </div>
+  </div>
+
+  <div id="branchWinnersModal" class="branch-winners-modal" aria-hidden="true">
+    <div class="branch-winners-backdrop" data-close-winners="1"></div>
+    <div class="branch-winners-dialog" role="dialog" aria-modal="true" aria-labelledby="branchWinnersTitle">
+      <button id="branchWinnersClose" class="branch-winners-close" type="button" aria-label="Cerrar galería">✕</button>
+      <div class="branch-winners-head">
+        <p class="branch-winners-kicker">🏆 ÚLTIMOS GANADORES</p>
+        <h3 id="branchWinnersTitle" class="branch-winners-title">Ganadores recientes</h3>
+      </div>
+      <div id="branchWinnersTrack" class="branch-winners-track"></div>
     </div>
   </div>
 
@@ -3090,6 +3138,81 @@ function goToBranchPanel(){
 function getBranchVisual(branch){
   return String(branch?.image || window.__CONFIG_LOGO || document.getElementById('logoImg')?.src || '').trim();
 }
+function getBranchWinnerImages(branch){
+  if(!branch || !Array.isArray(branch.winners)) return [];
+  const seen = new Set();
+  return branch.winners
+    .map(v => String(v || '').trim())
+    .filter(Boolean)
+    .filter(url => {
+      if(seen.has(url)) return false;
+      seen.add(url);
+      return true;
+    });
+}
+function buildBranchWinnersFloat(branch){
+  const winners = getBranchWinnerImages(branch);
+  if(!winners.length) return '';
+  const loop = winners.length === 1 ? [winners[0], winners[0], winners[0], winners[0]] : winners.concat(winners);
+  return `
+    <button class="branch-winners-float" type="button" data-branch-winners="1" aria-label="Ver últimos ganadores de ${escapeHtml(branch.name || 'la sucursal')}">
+      <div class="branch-winners-label">🏆 <span>ÚLTIMOS GANADORES</span></div>
+      <div class="branch-winners-marquee" aria-hidden="true">
+        <div class="branch-winners-marquee-track">
+          ${loop.map((url, idx) => `<img class="branch-winners-avatar" src="${escapeHtml(url)}" alt="Ganador ${idx + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`).join('')}
+        </div>
+      </div>
+    </button>`;
+}
+function buildBranchWinnersSlides(branch){
+  return getBranchWinnerImages(branch).map((url, idx) => `
+    <article class="branch-winners-slide">
+      <div class="branch-winners-card">
+        <img src="${escapeHtml(url)}" alt="Último ganador ${idx + 1} de ${escapeHtml(branch?.name || 'la sucursal')}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+      </div>
+    </article>`).join('');
+}
+function closeBranchWinnersModal(){
+  const modal = document.getElementById('branchWinnersModal');
+  const track = document.getElementById('branchWinnersTrack');
+  if(!modal || !track) return;
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+function openBranchWinnersModal(branch){
+  const modal = document.getElementById('branchWinnersModal');
+  const title = document.getElementById('branchWinnersTitle');
+  const track = document.getElementById('branchWinnersTrack');
+  if(!modal || !title || !track) return;
+  const winners = getBranchWinnerImages(branch);
+  if(!winners.length) return;
+  title.textContent = `Ganadores recientes de ${branch?.name || 'la sucursal'}`;
+  track.innerHTML = buildBranchWinnersSlides(branch);
+  track.scrollLeft = 0;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function wireBranchWinnersModal(){
+  const modal = document.getElementById('branchWinnersModal');
+  const closeBtn = document.getElementById('branchWinnersClose');
+  if(!modal || modal.dataset.wired === '1') return;
+  modal.dataset.wired = '1';
+
+  modal.addEventListener('click', (e)=>{
+    if(e.target?.closest('[data-close-winners="1"]')) closeBranchWinnersModal();
+  });
+
+  closeBtn?.addEventListener('click', (e)=>{
+    e.preventDefault();
+    closeBranchWinnersModal();
+  }, { passive:false });
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && modal.classList.contains('show')) closeBranchWinnersModal();
+  });
+}
 async function fetchBranches(){
   try{
     const txt = await fetchCsvBySheetRangeFromKey(
@@ -3115,21 +3238,17 @@ async function fetchBranches(){
         enabledRaw === '1' ||
         enabledRaw === 'si' ||
         enabledRaw === 'sí';
+      const winners = row.slice(5, 10)
+        .map(v => String(v || '').trim())
+        .filter(Boolean);
 
       if(!enabled) continue;
-      if(!name && !detail && !image && !rawSheetId) continue;
+      if(!name && !detail && !image && !rawSheetId && !winners.length) continue;
 
       const branchIndex = out.length;
       const sheetId = sanitizeSheetId(rawSheetId);
-      if(!name || !sheetId) continue;
 
-      // 👇 NUEVO: Capturar ganadores (Columnas F a J = índices 5 al 9)
-      const winners = [];
-      for (let w = 5; w <= 9; w++) {
-        if (row[w] && String(row[w]).trim() !== '') {
-          winners.push(String(row[w]).trim());
-        }
-      }
+      if(!name || !sheetId) continue;
 
       out.push({
         index: branchIndex,
@@ -3137,8 +3256,8 @@ async function fetchBranches(){
         name,
         detail,
         image,
+        winners,
         sheetId,
-        winners, // Añadimos el array de ganadores
         enabled: true,
         isBase: false
       });
@@ -3220,43 +3339,26 @@ function renderBranchSelector(branches){
   const title = document.getElementById('branchMainTitle');
   const logo = document.getElementById('branchMainLogo');
 
-  // Actualiza el Logo Superior
   if(logo) logo.src = window.__CONFIG_LOGO || document.getElementById('logoImg')?.src || '';
-  
-  // Asigna el nombre de la empresa al lado del logo
   if(title) title.textContent = window.__CONFIG_NAME || 'RIFAS';
+
+  wireBranchWinnersModal();
 
   if(grid){
     grid.className = 'branch-grid' + (BRANCHES.length === 1 ? ' one' : '');
-    
-    // Tarjetas súper compactas y eficientes (Solo detalle + imagen maximizada)
     grid.innerHTML = BRANCHES.map((branch, idx)=>{
       const visual = getBranchVisual(branch);
-      
-      // 👇 NUEVO: Generar el HTML del mini carrusel si hay ganadores
-      let winnersDOM = '';
-      if (branch.winners && branch.winners.length > 0) {
-        // Duplicamos las imágenes para lograr el efecto de scroll infinito sin cortes
-        const imgsHtml = branch.winners.map(w => `<img src="${escapeHtml(w)}" alt="Ganador" loading="lazy">`).join('');
-        winnersDOM = `
-          <div class="mini-winners-module" onclick="openWinnersModal(event, ${idx})">
-            <div class="mini-winners-badge">🏆 ÚLTIMOS GANADORES</div>
-            <div class="mini-winners-track">
-              ${imgsHtml}${imgsHtml}
-            </div>
-          </div>
-        `;
-      }
-
+      const winnersFloat = buildBranchWinnersFloat(branch);
       return `
         <button class="branch-card${BRANCHES.length===1?' single':''}" type="button" data-branch-index="${idx}" aria-label="Abrir sucursal">
           <p class="branch-card-detail">${escapeHtml(branch.detail || 'Toca para acceder')}</p>
           <div class="branch-thumb">
             ${visual ? `<img src="${escapeHtml(visual)}" alt="Sucursal" referrerpolicy="no-referrer">` : `<div class="branch-thumb-fallback">🎟️</div>`}
-            ${winnersDOM} </div>
+            ${winnersFloat}
+          </div>
         </button>`;
     }).join('');
-    
+
     grid.querySelectorAll('.branch-card').forEach(el=>{
       el.addEventListener('click', ()=>{
         const idx = Number(el.getAttribute('data-branch-index'));
@@ -3265,14 +3367,23 @@ function renderBranchSelector(branches){
         el.classList.add('is-entering');
         openBranch(branch);
       }, {passive:true});
+
+      const winnersTrigger = el.querySelector('[data-branch-winners="1"]');
+      if(winnersTrigger){
+        winnersTrigger.addEventListener('click', (e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          const idx = Number(el.getAttribute('data-branch-index'));
+          const branch = BRANCHES[idx];
+          if(branch) openBranchWinnersModal(branch);
+        }, { passive:false });
+      }
     });
   }
   
   if(shell) shell.classList.add('show');
   hideBranchEnterOverlay();
   setBranchBackVisibility();
-  
-  // Activar los indicadores visuales del panel
   manageScrollIndicator();
   manageSingleBranchTapIndicator();
 
@@ -4318,49 +4429,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     if(nowKey!==DAY_MARK){ DAY_MARK=nowKey; await syncMapFast(); DAILY=[]; pickDaily(true); renderGrid(); return; }
     const before=DAILY.length; await syncMapFast(); if(DAILY.length!==before){ renderGrid(); }
   }, 20000);
-
-  function openWinnersModal(e, branchIdx) {
-  // ¡Crucial! Evita que el clic abra la sucursal
-  e.preventDefault();
-  e.stopPropagation();
-
-  const branch = BRANCHES[branchIdx];
-  if (!branch || !branch.winners || !branch.winners.length) return;
-
-  // Si el modal no existe en el HTML, lo creamos dinámicamente
-  let modal = document.getElementById('superWinnersModal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'superWinnersModal';
-    modal.className = 'super-winners-modal';
-    modal.innerHTML = `
-      <div class="sw-modal-content" onclick="event.stopPropagation()">
-        <button class="sw-close-btn" onclick="closeWinnersModal()">&times;</button>
-        <h3 class="sw-title">🏆 GALERÍA DE GANADORES</h3>
-        <p class="sw-subtitle">Desliza para verlos todos</p>
-        <div class="sw-gallery" id="swGalleryTrack"></div>
-      </div>
-    `;
-    modal.onclick = closeWinnersModal;
-    document.body.appendChild(modal);
-  }
-
-  // Llenar el carrusel grande
-  const track = document.getElementById('swGalleryTrack');
-  track.innerHTML = branch.winners.map(w => `
-    <div class="sw-slide">
-      <img src="${escapeHtml(w)}" alt="Ganador de la rifa">
-    </div>
-  `).join('');
-
-  // Mostrar con animación
-  requestAnimationFrame(() => modal.classList.add('show'));
-}
-
-function closeWinnersModal() {
-  const modal = document.getElementById('superWinnersModal');
-  if (modal) modal.classList.remove('show');
-}
 });
   </script>
 </body>
