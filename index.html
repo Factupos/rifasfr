@@ -4077,17 +4077,27 @@ function startWinnersAutoPlay() {
   stopWinnersAutoPlay(); 
 
   winnersAutoPlayTimer = setInterval(() => {
-    const slideWidth = track.clientWidth;
-    const currentScroll = track.scrollLeft;
-    const maxScroll = track.scrollWidth - slideWidth;
-    
-    // Si llegó a la última foto
-    if (currentScroll >= maxScroll - 10) {
-      // Regresa a la primera INSTANTÁNEAMENTE para evitar el "rebobinado" brusco
+    // 1. Obtenemos todas las diapositivas
+    const slides = Array.from(track.querySelectorAll('.winner-slide'));
+    if (!slides.length) return;
+
+    // 2. Encontramos cuál es la imagen que está activa actualmente
+    let activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
+    if (activeIndex === -1) activeIndex = 0;
+
+    let nextIndex = activeIndex + 1;
+
+    // 3. Verificamos si llegamos a la última foto
+    if (nextIndex >= slides.length) {
+      // Regresa a la primera de forma instantánea para evitar rebobinado brusco
       track.scrollTo({ left: 0, behavior: 'auto' });
     } else {
-      // Avanza a la siguiente foto de manera natural
-      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+      // 4. Hacemos que el navegador centre exactamente la siguiente imagen
+      slides[nextIndex].scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest', 
+        inline: 'center' // ¡Esta es la magia que la mantiene siempre centrada!
+      });
     }
   }, 3000);
 }
