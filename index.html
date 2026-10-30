@@ -2412,6 +2412,167 @@ header::before{content:"";position:absolute;inset:auto 18px 0;height:2px;
 
 </style>
 
+
+<style id="raffle-minimal-color-upgrade">
+/* === Ajuste visual enfocado en los cuadros numéricos === */
+:root{
+  --raffle-surface-1:#ffffff;
+  --raffle-surface-2:#f3faff;
+  --raffle-surface-3:#edf4ff;
+  --raffle-ink:#12314f;
+  --raffle-muted:#6b7f96;
+  --raffle-line:rgba(48,92,139,.16);
+  --raffle-accent-a:#52d7df;
+  --raffle-accent-b:#6b8cff;
+  --raffle-accent-c:#f4c56f;
+  --raffle-selected-a:#12385c;
+  --raffle-selected-b:#0e2748;
+}
+
+.raffle,
+.search-result .raffle,
+.large-raffle{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  border-radius:20px!important;
+  border:1px solid var(--raffle-line)!important;
+  background:
+    radial-gradient(circle at 16% 16%, rgba(82,215,223,.18) 0 16%, transparent 17%),
+    radial-gradient(circle at 86% 18%, rgba(107,140,255,.14) 0 15%, transparent 16%),
+    linear-gradient(145deg,var(--raffle-surface-1) 0%,var(--raffle-surface-2) 56%,var(--raffle-surface-3) 100%)!important;
+  box-shadow:
+    0 14px 28px rgba(17,46,79,.10),
+    0 3px 8px rgba(17,46,79,.05),
+    inset 0 1px 0 rgba(255,255,255,.92)!important;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    filter .18s ease!important;
+}
+
+.raffle::before,
+.search-result .raffle::before,
+.large-raffle::before{
+  content:""!important;
+  position:absolute;
+  inset:5px!important;
+  border-radius:15px!important;
+  border:1px solid rgba(18,49,79,.07)!important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.70), rgba(255,255,255,0) 42%),
+    linear-gradient(90deg, rgba(82,215,223,.12), rgba(107,140,255,.10) 56%, rgba(244,197,111,.10));
+  -webkit-mask:none!important;
+  mask:none!important;
+  padding:0!important;
+  opacity:1!important;
+  pointer-events:none;
+}
+
+.raffle::after,
+.search-result .raffle::after,
+.large-raffle::after{
+  content:"RIFAS · ORIGINAL"!important;
+  position:absolute;
+  left:10px; right:10px; bottom:10px!important;
+  z-index:1;
+  text-align:center;
+  color:var(--raffle-muted)!important;
+  font-size:8px!important;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  background:none!important;
+  pointer-events:none;
+}
+
+.raffle .num,
+.search-result .raffle .num,
+.large-raffle .num{
+  position:relative;
+  z-index:2;
+  color:var(--raffle-ink)!important;
+  font-weight:1000!important;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.6px!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.92)!important;
+  transform:translateY(-5px);
+}
+
+.raffle:hover,
+.search-result .raffle:hover,
+.large-raffle:hover{
+  transform:translateY(-4px)!important;
+  border-color:rgba(107,140,255,.34)!important;
+  box-shadow:
+    0 18px 34px rgba(17,46,79,.14),
+    0 5px 12px rgba(17,46,79,.07),
+    0 0 0 1px rgba(82,215,223,.12) inset!important;
+}
+
+.raffle.tap-effect{
+  transform:scale(.975)!important;
+  filter:saturate(1.03);
+}
+
+.raffle .tick{
+  width:26px;height:26px;top:7px;right:7px;
+  border-radius:999px;
+  background:linear-gradient(145deg,#ffffff,#ecfbfb)!important;
+  color:#0e8f95!important;
+  border:1px solid rgba(82,215,223,.38)!important;
+  box-shadow:0 4px 10px rgba(17,46,79,.10)!important;
+}
+
+.raffle.selected,
+.search-result .raffle.selected,
+.large-raffle.selected{
+  border:1px solid rgba(244,197,111,.58)!important;
+  background:
+    radial-gradient(circle at 18% 15%, rgba(82,215,223,.24) 0 14%, transparent 15%),
+    radial-gradient(circle at 82% 18%, rgba(244,197,111,.18) 0 13%, transparent 14%),
+    linear-gradient(145deg,var(--raffle-selected-a) 0%,#173f64 48%,var(--raffle-selected-b) 100%)!important;
+  box-shadow:
+    0 16px 34px rgba(10,35,65,.28),
+    0 0 0 2px rgba(244,197,111,.18)!important;
+}
+
+.raffle.selected::before,
+.search-result .raffle.selected::before,
+.large-raffle.selected::before{
+  border:1px solid rgba(255,255,255,.12)!important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,0) 40%),
+    linear-gradient(90deg, rgba(82,215,223,.24), rgba(107,140,255,.12) 58%, rgba(244,197,111,.18))!important;
+}
+
+.raffle.selected::after,
+.search-result .raffle.selected::after,
+.large-raffle.selected::after{
+  color:#f6d99a!important;
+}
+
+.raffle.selected .num,
+.search-result .raffle.selected .num,
+.large-raffle.selected .num{
+  color:#ffffff!important;
+  text-shadow:0 3px 10px rgba(0,0,0,.24)!important;
+}
+
+.raffle.selected .tick,
+.search-result .raffle.selected .tick,
+.large-raffle.selected .tick{
+  background:linear-gradient(145deg,#effffd,#d8f8f2)!important;
+  color:#0b8d86!important;
+  border-color:rgba(244,197,111,.48)!important;
+}
+
+.large-raffle{border-radius:24px!important}
+.large-raffle::after{bottom:14px!important;font-size:10px!important}
+</style>
+
 </head>
 
 <body>
