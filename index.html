@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8"/>
-  <title>Pagina</title>
+  <title>Rifas | Experiencia Digital</title>
   <!-- ✅ Favicon dinámico (se reemplaza al cargar el logo desde Sheets) -->
   <link id="dynamicFavicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%0A%3Cstop%20offset%3D%270%27%20stop-color%3D%27%2300D46A%27/%3E%3Cstop%20offset%3D%270.33%27%20stop-color%3D%27%230B5CFF%27/%3E%3Cstop%20offset%3D%270.66%27%20stop-color%3D%27%23FFC400%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23FF2E2E%27/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27url%28%23g%29%27/%3E%0A%3Ccircle%20cx%3D%2732%27%20cy%3D%2734%27%20r%3D%2716%27%20fill%3D%27rgba%280%2C0%2C0%2C.25%29%27/%3E%0A%3Cpath%20d%3D%27M22%2038c4%206%2016%206%2020%200%27%20stroke%3D%27%23fff%27%20stroke-width%3D%274%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%0A%3C/svg%3E">
   <link id="dynamicFaviconShortcut" rel="shortcut icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%0A%3Cstop%20offset%3D%270%27%20stop-color%3D%27%2300D46A%27/%3E%3Cstop%20offset%3D%270.33%27%20stop-color%3D%27%230B5CFF%27/%3E%3Cstop%20offset%3D%270.66%27%20stop-color%3D%27%23FFC400%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23FF2E2E%27/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27url%28%23g%29%27/%3E%0A%3Ccircle%20cx%3D%2732%27%20cy%3D%2734%27%20r%3D%2716%27%20fill%3D%27rgba%280%2C0%2C0%2C.25%29%27/%3E%0A%3Cpath%20d%3D%27M22%2038c4%206%2016%206%2020%200%27%20stroke%3D%27%23fff%27%20stroke-width%3D%274%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%0A%3C/svg%3E">
@@ -2247,6 +2247,169 @@ header{
   opacity: 1;
   filter: blur(0px);
 }
+/* ===========================================================
+   RIFAS · ATELIER DIGITAL / PREMIUM IDENTITY v1
+   Presentación exclusivamente: no modifica datos ni eventos.
+   =========================================================== */
+:root{
+  --brand-purple:#101b35;--brand-gold:#d49b39;--brand-blue:#00a9c0;
+  --brand-magenta:#30b59c;--brand-1:#101b35;--brand-2:#d49b39;
+  --brand-3:#00a9c0;--accent1:#d49b39;--accent2:#00a9c0;
+  --accent3:#30b59c;--ink:#13233e;--muted:#65758c;
+  --bg-solid:#f2f5fb;--panel:#fff;--panel-strong:#fff;
+  --panel-border:#dce4ee;
+  --bg-grad:radial-gradient(ellipse at 8% 5%,rgba(76,148,204,.13),transparent 43%),
+    radial-gradient(ellipse at 95% 55%,rgba(212,155,57,.11),transparent 40%),
+    linear-gradient(145deg,#f6f9ff,#ecf1f8 55%,#f7f5f1);
+}
+html,body{background:var(--bg-solid)!important}
+body{color:var(--ink)!important}
+body::before{background:var(--bg-grad)!important}
+body::after{background:none!important}
+.top-veil{background:linear-gradient(#f5f8fdee,transparent)!important}
+header{
+  background:linear-gradient(115deg,rgba(12,25,48,.97),rgba(20,43,73,.96))!important;
+  border-bottom:1px solid rgba(221,180,103,.38)!important;
+  box-shadow:0 12px 35px rgba(15,30,54,.16)!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+  border-radius:0 0 24px 24px;
+}
+header::before{content:"";position:absolute;inset:auto 18px 0;height:2px;
+  background:linear-gradient(90deg,transparent,#d9b06b 26%,#43c4d2 74%,transparent);pointer-events:none}
+.brand-group{gap:18px!important}
+.brand-info h1{color:#f9fbff!important;text-shadow:none!important;letter-spacing:.045em!important;
+  font-weight:900!important}
+.brand-info::after{content:"✦  COLECCIÓN DIGITAL DE NÚMEROS";font-size:9px;
+  font-weight:850;letter-spacing:2.1px;color:#d6b476;margin-top:5px;line-height:1.4}
+.contact-info p{color:#b9c9dc!important;letter-spacing:.02em}
+.logoWrap{border-radius:26px!important;isolation:isolate}
+.logoWrap img{border:2px solid rgba(234,193,116,.75)!important;
+ box-shadow:0 7px 24px rgba(0,0,0,.25),0 0 0 5px rgba(255,255,255,.07)!important;
+ animation:none!important}
+.logoWrap::before,.logoWrap::after{animation:none!important;opacity:0!important}
+.search-wrapper{max-width:285px!important}
+.search-bar{height:52px!important;border-radius:15px!important;background:#f8fbff!important;
+ color:#14243f!important;border:1px solid #b9cce0!important;
+ box-shadow:inset 0 1px 3px #13233e0c,0 4px 12px #061a302b!important;
+ font-variant-numeric:tabular-nums;letter-spacing:5px!important}
+.search-bar:focus{border-color:#d6a95c!important;box-shadow:0 0 0 3px #d6a95c44!important}
+.search-bar::placeholder{color:#9eabc0!important}
+.search-icon{color:#aa7d35!important}
+.random-button,.finish-top-button{border-radius:15px!important;height:52px!important;
+ font-size:13px;letter-spacing:1.5px;box-shadow:0 4px 13px #0003!important;
+ animation:none!important}
+.random-button{background:linear-gradient(110deg,#eec67b,#bd842c)!important;color:#142136!important;
+ border:1px solid #f7d998!important}
+.finish-top-button{background:linear-gradient(110deg,#21c2c7,#138cae)!important}
+.random-button:hover,.finish-top-button:hover{filter:brightness(1.05)}
+#raffles{gap:14px!important;max-width:1350px}
+/* Grabado gráfico en CSS: se mantiene cuando se reutilizan los componentes. */
+.raffle{
+  --size:clamp(90px,24vw,124px);
+  border-radius:17px!important;isolation:isolate;
+  border:1px solid #c9d4e4!important;
+  background:linear-gradient(151deg,#fff 0%,#f9fbff 49%,#eaf1f9 100%)!important;
+  box-shadow:0 9px 20px #142c4b16,0 2px 4px #142c4b0a,
+    inset 0 1px 0 #fff!important;
+  transition:transform .20s ease,box-shadow .20s ease,border-color .20s ease!important;
+  contain:paint;
+}
+.raffle::before{
+ content:""!important;position:absolute;inset:5px!important;opacity:1!important;
+ border:1px solid rgba(28,76,112,.16);border-radius:12px!important;
+ background:linear-gradient(122deg,transparent 0 40%,rgba(199,157,83,.13) 50%,transparent 60%)!important;
+ -webkit-mask:none!important;mask:none!important;padding:0!important;pointer-events:none
+}
+.raffle::after{
+ content:"✦  RIFAS  •  DIGITAL"!important;position:absolute;inset:auto 4px 10px!important;
+ color:#8094a9!important;background:none!important;z-index:1;
+ text-align:center;font-size:8px!important;font-weight:800;letter-spacing:1.15px;
+ pointer-events:none
+}
+.raffle .num{font-size:clamp(33px,7.6vw,45px)!important;
+ font-weight:950!important;letter-spacing:.5px;color:#132441!important;
+ text-shadow:0 1px 0 #fff!important;transform:translateY(-5px);
+ font-variant-numeric:tabular-nums}
+.raffle:hover{transform:translateY(-3px)!important;border-color:#bd984f!important;
+ box-shadow:0 14px 29px #142c4b25,0 2px 5px #142c4b12!important}
+.raffle.tap-effect{transform:scale(.97)!important}
+.raffle.selected{background:linear-gradient(145deg,#143653,#10223c)!important;
+ border:1px solid #dcb26c!important;box-shadow:0 11px 26px #0b345159,0 0 0 2px #e4b96c55!important}
+.raffle.selected::before{border:1px solid #d8ad5b80!important;background:none!important}
+.raffle.selected::after{color:#f4c779!important}
+.raffle.selected .num{color:#fff!important;text-shadow:0 2px 8px #0005!important;
+ animation:none!important}
+.raffle .tick{width:25px;height:25px;top:6px;right:6px;
+ background:#fff!important;color:#0f736e!important;border:1px solid #cfad72!important;
+ box-shadow:0 2px 8px #0002!important}
+.raffle.selected .tick{color:#087a79!important;background:#e3fbf7!important}
+.search-result .raffle,.large-raffle{border-radius:22px!important;
+ box-shadow:0 16px 42px #13244130!important}
+.large-raffle .num{font-size:clamp(48px,11vw,65px)!important}
+.large-raffle::after{font-size:11px!important;bottom:15px!important}
+.cart-panel{background:#f9fbff!important;border:1px solid #d4dfeb!important;
+ border-radius:17px!important;box-shadow:0 7px 19px #071c3229!important}
+.cart-label{color:#344b65!important}
+.cart-item{background:linear-gradient(130deg,#fff,#e8f0f9)!important;
+ border:1px solid #d4b780!important;box-shadow:0 3px 8px #13244119!important}
+.cart-item-num{color:#152d48!important}
+.cart-item-remove{background:#f5e8d3!important;color:#925b22!important}
+.box,.bootCard,.blockCard,.branch-enter-card,.loading-message{
+ background:linear-gradient(145deg,#fff,#f3f7fc)!important;
+ border:1px solid #d5dfea!important;box-shadow:0 25px 75px #0d23444a!important}
+.ov,.branch-enter-overlay{background:#0b1b34a8!important}
+.btn.ok,.blockBtn{background:linear-gradient(120deg,#d9b16c,#ba812c)!important;color:#142136!important}
+.btn.no,.blockBtn.secondary{background:#e7edf5!important;color:#203b59!important}
+.boot{background:#eff4fb!important}
+.bootTitle,.branch-enter-title,.blockTitle{color:#152a47!important}
+.bootBar,.branch-enter-progress>i{background:linear-gradient(90deg,#daa85b,#1aaeb9)!important}
+.dotPulse{background:#d7a45b}
+/* Sucursales: mismo lenguaje visual de las boletas. */
+.branch-shell{background:var(--bg-grad)!important}
+.branch-shell::before{background:radial-gradient(circle at 55% -10%,#85b8d42b,transparent 48%)!important}
+.branch-inner{padding-bottom:38px}
+.branch-topbar{background:linear-gradient(115deg,#0e2340,#193854);
+ border:1px solid #d5aa6244;border-radius:24px;padding:14px 20px;
+ box-shadow:0 16px 34px #1026422a;max-width:1100px}
+.branch-main-title{color:#fff!important;text-shadow:none!important}
+.branch-brand .mini-logo{background:#fff!important;border:2px solid #d5ac67!important;
+ box-shadow:0 4px 17px #0004!important;animation:none!important}
+.branch-grid{gap:20px}
+.branch-card{background:linear-gradient(155deg,#fff,#f7faff)!important;
+ border:1px solid #cbd8e8!important;border-radius:26px!important;
+ box-shadow:0 12px 28px #102d4b1b!important;
+ padding:14px;transition:transform .22s ease,box-shadow .22s ease!important}
+.branch-card::before{background:linear-gradient(90deg,#d3a05a,#19acbe)!important;
+ z-index:2;inset:0 0 auto;height:4px;opacity:1!important;border-radius:0!important}
+.branch-card:hover{transform:translateY(-4px);
+ box-shadow:0 20px 38px #102d4b30!important}
+.branch-card-detail{background:#ebf2f9!important;border:1px solid #d4e1ef!important;
+ border-bottom:3px solid #c69c5d!important;color:#203a5b!important;
+ box-shadow:none!important;border-radius:15px}
+.branch-thumb img{border-radius:16px!important;border:1px solid #dce4ef!important;
+ box-shadow:0 5px 18px #102d4b21!important}
+.branch-back-btn{background:#fff!important;border:1px solid #d5ad6a!important;
+ box-shadow:0 5px 15px #0d254332!important}
+.branch-back-btn__icon{fill:#193451!important}
+.winners-lightbox{background:#0c1b32f2}
+.winners-title{color:#f3d49e!important}
+.winners-close{border-color:#d6ae6d!important}
+@media(max-width:768px){
+ header{border-radius:0 0 19px 19px}
+ .logoWrap{width:68px!important;height:68px!important;border-radius:18px!important}
+ .brand-info h1{font-size:clamp(19px,5vw,29px)!important}
+ .brand-info::after{font-size:7px;letter-spacing:1px}
+ .raffle{--size:clamp(89px,25vw,116px)}
+ .raffle::after{font-size:7px!important;letter-spacing:.7px}
+ .branch-topbar{padding:12px 10px;border-radius:19px}
+ .branch-card{min-height:250px}
+}
+@media(max-width:380px){.raffle .num{font-size:33px!important}}
+@media(hover:none){.raffle:hover,.branch-card:hover{transform:none!important}}
+@media(prefers-reduced-motion:reduce){
+ .raffle,.branch-card,.random-button,.finish-top-button{animation:none!important;transition:none!important}
+}
+
 </style>
 
 </head>
